@@ -12,7 +12,7 @@ class Route:
 Routes = [
     Route("/", "home", ["GET", "POST"], True, home.__doc__),
     Route("/-", "getback", ["GET", "POST"], True, getback.__doc__),
-    Route("/<Author>-<Title>", "get_lel", ["GET", "POST"], True, get_lel.__doc__),
+    Route("/{Author}-{Title}", "get_lel", ["GET", "POST"], True, get_lel.__doc__),
     Route("/createpost", "createOne", ["POST"], True, createOne.__doc__),
     Route("/checkpost", "checkpost", ["POST"], True, checkpost.__doc__)
 ]
