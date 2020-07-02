@@ -3,6 +3,9 @@ from flask import render_template, request, jsonify, redirect
 from models import Page, db
 from sqlalchemy.exc import IntegrityError
 import json
+from delta import html
+from html2text import html2text
+from transliterate import translit
 
 @app.route('/<Author>-<Title>', methods=['GET', 'POST'])
 def get_lel(Author, Title):
@@ -20,12 +23,12 @@ def get_lel(Author, Title):
             return jsonify({ "message" : "Seems like you are trying to get the data from the post, but you can't do it like that." })
     elif request.method == 'GET':
         rows = db.session.query(Page).count()
-        if rows >= 151:
+        if rows >= 51:
             Page.query.delete()
         data = Page.query.filter_by(urlauthor=Author, urltitle=Title).first()
         if data is not None:
-            authorname = str(data.cyrauthor).replace("_", " ")
-            headlinename = str(data.cyrtitle).replace("_", " ")
+            authorname = str(data.cyrauthor).replace("_", " ").replace("+question+", "?")
+            headlinename = str(data.cyrtitle).replace("_", " ").replace("+question+", "?")
             contentname = data.text
             datevalue = str(data.date)[:10]
             content = None
@@ -43,8 +46,8 @@ def get_lel(Author, Title):
                 data = Page(urltitle=Title, urlauthor=Author, cyrauthor=cyrauthor, cyrtitle=cyrheadline, text=content)
                 db.session.add(data)
                 db.session.commit()
-            authorname = str(data.cyrauthor).replace("_", " ")
-            headlinename = str(data.cyrtitle).replace("_", " ")
+            authorname = str(data.cyrauthor).replace("_", " ").replace("+question+", "?")
+            headlinename = str(data.cyrtitle).replace("_", " ").replace("+question+", "?")
             contentname = data.text
             datevalue = str(data.date)[:10]
             content = None
@@ -77,17 +80,19 @@ def createOne():
     else:
         try:
             content = None
-            data = Page(cyrtitle=ti, cyrauthor=an, urltitle=ti, urlauthor=an, text=ct)
+            data = Page(cyrtitle=ti, cyrauthor=an, urltitle=translit(str(ti).replace(" ", "_"), 'ru', reversed=True), urlauthor=translit(str(an).replace(" ", "_"), 'ru', reversed=True), text=ct)
             db.session.add(data)
             db.session.commit()
         except:
             return jsonify({ "message" : "Something went wrong! Try again." })
-    authorname = str(data.cyrauthor).replace("_", " ")
-    headlinename = str(data.cyrtitle).replace("_", " ")
+    authorname = str(data.cyrauthor)
+    headlinename = str(data.cyrtitle)
+    urlheadline = str(data.urltitle)
+    urlauthor = str(data.urlauthor)
     contentname = data.text
     datevalue = str(data.date)[:10]
     content = None
-    return jsonify({ "link" : f"/{authorname}-{headlinename}", "author" : authorname, "title" : headlinename, "content" : contentname, "publish date" : datevalue })
+    return jsonify({ "link" : f"/{urlauthor}-{urlheadline}", "author" : authorname, "title" : headlinename, "content" : contentname, "publish date" : datevalue })
 
 @app.route('/checkpost', methods=["POST"])
 def checkpost():
@@ -102,13 +107,17 @@ def checkpost():
     if data is not None:
         try:
             ct = json.loads(data.text)['ops']
+            output = html.render(ct)
+            output = html2text(output)
             date = data.date
         except:
-            ct = data.text
+            output = data.text
             date = data.date
     else:
         return jsonify({ "message" : "This post doesn't exist. Create one on /createpost page." })
-    return jsonify({ "title" : title, "author" : author, "publish date" : date, "content" : ct })
+    urlheadline = data.urltitle
+    urlauthor = data.urlauthor
+    return jsonify({ "title" : title, "link": f"/{urlauthor}-{urlheadline}","author" : author, "publish date" : date, "content" : output })
 
 @app.route('/-', methods=['GET', 'POST'])
 def getback():
