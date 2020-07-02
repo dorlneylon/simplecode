@@ -1,6 +1,7 @@
 h1 a {
     margin-left: 1%;
     margin-right: 70%;
+    text-decoration: none;
     color: #000000;
     font-family: 'Lora', serif;
 }
@@ -196,6 +197,7 @@ blockquote {
     h1 a {
         margin-left: 1%;
         margin-right: 70%;
+        text-decoration: none;
         color: #000000;
         font-family: 'Lora', serif;
     }
@@ -388,10 +390,11 @@ blockquote {
     ::-webkit-selection { background:#dbdbdb }
 }
 
-@media (min-width: 1px) and (max-width: 992px) {
+@media screen and (max-width: 992px) {
     h1 a {
         margin-left: 1%;
         margin-right: 70%;
+        text-decoration: none;
         font-size: 20px;
         margin-top: -20%;
         color: #000000;
