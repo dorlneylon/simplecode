@@ -1,3 +1,5 @@
-# SimpleCode. Site: http://simplecode.ml
+# SimpleCode.
 ## Creator's telegram acc: @diedincalm.
-## I am remaking Pastebin and using Telegra.ph features.
+## I was remaking Pastebin and using Telegra.ph features.
+
+Fuck this. That's the end.
