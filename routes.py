@@ -1,4 +1,5 @@
 from application import app
+from app_config import POSTS_LIMIT
 from flask import render_template, request, jsonify, redirect, Markup
 from models import Page, db
 from sqlalchemy.exc import IntegrityError
@@ -9,8 +10,8 @@ from transliterate import translit
 
 @app.route('/<Author>-<Title>', methods=['GET', 'POST'])
 def get_lel(Author, Title):
-    """
-    Description: Here you can see what have you or somebody published recently. Make sure, that more than 29 posts at once are not allowed on this site.
+    f"""
+    Description: Here you can see what have you or somebody published recently. Make sure, that more than {POSTS_LIMIT} posts at once are not allowed on this site.
     Possible errors: 404.
     Output example: page with data.
     """
@@ -18,7 +19,7 @@ def get_lel(Author, Title):
         return jsonify({ "message" : "To get data from post using POST method go to /checkpost page with author and title fields." })
     elif request.method == 'GET':
         rows = db.session.query(Page).count()
-        if rows >= 51:
+        if rows > POSTS_LIMIT:
             Page.query.delete()
         data = Page.query.filter_by(urlauthor=Author, urltitle=Title).first()
         if data is not None:
