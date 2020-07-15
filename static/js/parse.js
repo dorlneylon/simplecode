@@ -23,7 +23,7 @@ aquill.root.setAttribute("spellcheck", false);
 
 let toolbarOptions = {
     container: [
-        ["bold", "italic", "underline", "strike", { header: 1 }, { header: 2 }],
+        ["bold", "italic", "underline", { header: 1 }, { header: 2 }],
         ["blockquote", "code-block"],
     ],
 };
@@ -53,14 +53,14 @@ function func1() {
                 if (delta != '{"ops":[{"insert":""}]}') {
                     if (isCyrillic(title) === false) {
                         if (isCyrillic(author) === false) {
-                            $.post("/" + stripedauthor + "-" + stripedtitle, { cyrauthor: stripedauthor, cyrheadline: stripedtitle, content: JSON.stringify(delta) });
+                            $.post("/cpapi", { cyrauthor: stripedauthor, cyrheadline: stripedtitle, urltitle: stripedtitle, urlauthor: stripedauthor, content: JSON.stringify(delta) });
                             setTimeout(() => {
                                 window.location.href = "/" + stripedauthor + "-" + stripedtitle;
                             }, 1500);
                         } else {
                             var transedtitle = transliterate(stripedtitle);
                             var transedauthor = transliterate(stripedauthor);
-                            $.post("/" + transedauthor + "-" + transedtitle, { cyrauthor: stripedauthor, cyrheadline: stripedtitle, content: JSON.stringify(delta) });
+                            $.post("/cpapi", { cyrauthor: stripedauthor, cyrheadline: stripedtitle, urlauthor: transedauthor, urltitle: transedtitle, content: JSON.stringify(delta) });
                             setTimeout(() => {
                                 window.location.href = "/" + transedauthor + "-" + transedtitle;
                             }, 1500);
@@ -68,7 +68,7 @@ function func1() {
                     } else {
                         var transedtitle = transliterate(stripedtitle);
                         var transedauthor = transliterate(stripedauthor);
-                        $.post("/" + transedauthor + "-" + transedtitle, { cyrauthor: stripedauthor, cyrheadline: stripedtitle, content: JSON.stringify(delta) });
+                        $.post("/cpapi", { cyrauthor: stripedauthor, cyrheadline: stripedtitle, urlauthor: transedauthor, urltitle: transedtitle, content: JSON.stringify(delta) });
                         setTimeout(() => {
                             window.location.href = "/" + transedauthor + "-" + transedtitle;
                         }, 1500);

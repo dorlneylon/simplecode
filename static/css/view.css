@@ -176,7 +176,7 @@ blockquote {
         width: 100%;
         font-size: 15px;
         box-sizing: border-box;
-        margin-top: -4%;
+        margin-top: -3%;
         margin-left: 5%;
         margin-right: 5%;
         border: none;
@@ -231,14 +231,14 @@ blockquote {
     
     #TITLETEXT {
         font-family: 'Lora', serif;
-        width: 85%;
+        width: 95%;
         box-sizing: border-box;
         margin-top: 2%;
         margin-left: 5%;
         margin-right: 10%;
         border: none;
         background: transparent;
-        font-size: 25px;
+        font-size: 20px;
         color: #000;
     }
     
@@ -255,9 +255,9 @@ blockquote {
     
     #AUTHORNAME {
         font-family: 'Lora', serif;
-        width: 85%;
+        width: 95%;
         box-sizing: border-box;
-        margin-top: -2%;
+        margin-top: 0%;
         margin-left: 5%;
         margin-right: 10%;
         border: none;
@@ -279,13 +279,12 @@ blockquote {
     
     #INPUTTEXT {
         font-family: 'Lora', serif;
-        width: 85%;
-        font-size: 35px;
+        width: 95%;
         box-sizing: border-box;
         margin-top: 2%;
         margin-left: 1%;
         margin-right: 10%;
-        font-size: 27px;
+        font-size: 20px;
         border: none;
         background: transparent;
     }

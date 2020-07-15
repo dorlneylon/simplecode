@@ -1,5 +1,5 @@
 from application import app
-from flask import render_template, request, jsonify, redirect
+from flask import render_template, request, jsonify, redirect, Markup
 from models import Page, db
 from sqlalchemy.exc import IntegrityError
 import json
@@ -9,18 +9,13 @@ from transliterate import translit
 
 @app.route('/<Author>-<Title>', methods=['GET', 'POST'])
 def get_lel(Author, Title):
-    """Here you can see what have you or somebody published recently. Make sure, that more than 29 posts at once are not allowed on this site."""
+    """
+    Description: Here you can see what have you or somebody published recently. Make sure, that more than 29 posts at once are not allowed on this site.
+    Possible errors: 404.
+    Output example: page with data.
+    """
     if request.method == 'POST':
-        global content
-        global cyrauthor
-        global cyrheadline
-        try:
-            cyrheadline = request.form['cyrheadline']
-            cyrauthor = request.form['cyrauthor']
-            content = request.form['content']
-            return content
-        except KeyError:
-            return jsonify({ "message" : "Seems like you are trying to get the data from the post, but you can't do it like that." })
+        return jsonify({ "message" : "To get data from post using POST method go to /checkpost page with author and title fields." })
     elif request.method == 'GET':
         rows = db.session.query(Page).count()
         if rows >= 51:
@@ -31,31 +26,15 @@ def get_lel(Author, Title):
             headlinename = str(data.cyrtitle).replace("_", " ").replace("+question+", "?")
             contentname = data.text
             datevalue = str(data.date)[:10]
-            content = None
             return render_template('view.html', author=authorname, title=headlinename, content=contentname, date=datevalue)
-        elif data is None and content is None:
-            return render_template('404.html')
         else:
-            try:
-                data = Page(urltitle=Title, urlauthor=Author, cyrauthor=cyrauthor, cyrtitle=cyrheadline, text=content)
-                db.session.add(data)
-                db.session.commit()
-            except IntegrityError:
-                data = Page.query.filter_by(urlauthor=Author, urltitle=Title).first()
-                db.session.delete(data)
-                data = Page(urltitle=Title, urlauthor=Author, cyrauthor=cyrauthor, cyrtitle=cyrheadline, text=content)
-                db.session.add(data)
-                db.session.commit()
-            authorname = str(data.cyrauthor).replace("_", " ").replace("+question+", "?")
-            headlinename = str(data.cyrtitle).replace("_", " ").replace("+question+", "?")
-            contentname = data.text
-            datevalue = str(data.date)[:10]
-            content = None
-            return render_template('view.html', author=authorname, title=headlinename, content=contentname, date=datevalue)
+            return render_template('404.html')
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    """Home page where you're able to create a post or to check how to use API."""
+    """
+    Description: Home page where you're able to create a post or to check how to use API.
+    """
     global content
     content = None
     if request.method == "GET":
@@ -65,7 +44,11 @@ def home():
 
 @app.route('/createpost', methods=['POST'])
 def createOne():
-    """Page where you can create a post if it doesn't exist yet. Make sure that you can't use Rich Text Editor with this thing."""
+    """
+    Description: Page where you can create a post if it doesn't exist yet. Make sure that you can't use Rich Text Editor with this thing.
+    Possible errors: KeyError, IntegrityError.
+    Output example: { "link" : "/testauthor-testtitle", "author" : testauthor, "title" : testtitle, "content" : testcontent, "publish date" : testdate }.
+    """
     try:
         json = request.get_json('author')
         an = json['author']
@@ -94,9 +77,33 @@ def createOne():
     content = None
     return jsonify({ "link" : f"/{urlauthor}-{urlheadline}", "author" : authorname, "title" : headlinename, "content" : contentname, "publish date" : datevalue })
 
+@app.route('/cpapi', methods=["POST"])
+def cpapi():
+    """
+    Description: cpapi - create post using api. There's no need to go on that page, cuz it is being used only create a post by "submit" button.
+    Possible errors: KeyError, IntegrityError.
+    Output: 200.
+    """
+    cyrtitle = request.form['cyrheadline']
+    cyrauthor = request.form['cyrauthor']
+    urltitle = request.form['urltitle']
+    urlauthor = request.form['urlauthor']
+    text = request.form['content']
+    try:
+        data = Page(cyrtitle=cyrtitle, cyrauthor=cyrauthor, urltitle=urltitle, urlauthor=urlauthor, text=text)
+        db.session.add(data)
+        db.session.commit()
+    except:
+        return "</h1> Something went wrong! </h1>"
+    return 200
+
 @app.route('/checkpost', methods=["POST"])
 def checkpost():
-    """You can check if post exists and if it exists then you'll be able to get it's author, title, publish date and content information."""
+    """
+    Description: You can check if post exists and if it exists then you'll be able to get it's author, title, publish date and content information.
+    Possible errors: IntegrityError, KeyError.
+    Output example: { "link" : "/testauthor-testtitle", "author" : testauthor, "title" : testtitle, "content" : testcontent, "publish date" : testdate }.
+    """
     try:
         js = request.get_json('author')
         author = js['author']
@@ -117,9 +124,18 @@ def checkpost():
         return jsonify({ "message" : "This post doesn't exist. Create one on /createpost page." })
     urlheadline = data.urltitle
     urlauthor = data.urlauthor
-    return jsonify({ "title" : title, "link": f"/{urlauthor}-{urlheadline}","author" : author, "publish date" : date, "content" : output })
+    return jsonify({ "title" : title, "link": f"/{urlauthor}-{urlheadline}", "author" : author, "publish date" : date, "content" : output })
 
 @app.route('/-', methods=['GET', 'POST'])
 def getback():
-    """This page was created just to make sure people are not trying to publish empty fields. In the newer version of this site JS already checks that, though."""
+    """
+    Description: This page was created just to make sure people are not trying to publish empty fields. In the newer version of this site JS already checks that, though.
+    """
     return redirect('/')
+
+@app.route('/index', methods=["POST", "GET"])
+def index():
+    """
+    Description: simple redirect if you want to use /index.
+    """
+    return redirect("/")
