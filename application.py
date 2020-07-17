@@ -1,11 +1,9 @@
 from flask import Flask
 import os
+from app_config import POSTS_LIMIT, HOST, DEBUG, PORT
 
 application = app = Flask(__name__)
-
-from app_config import *
 from routes import *
-from models import db
 
 if __name__ == "__main__":
     os.system('cls')
