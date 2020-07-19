@@ -40,39 +40,21 @@ var quill = new Quill("#INPUTTEXT", {
 quill.root.setAttribute("spellcheck", false);
 function func1() {
     var title = tiquill.root.innerText;
-    var stripedtitle = title.split(" ").join("_").split("?").join("+question+");
+    var stripedtitle = title;
     var author = aquill.root.innerText;
-    var stripedauthor = author.split(" ").join("_").split("?").join("+question+");
-    var isCyrillic = function (text) {
-        return /[а-я]/i.test(text);
-    };
+    var stripedauthor = author;
+    const rand=()=>Math.random(0).toString(36).substr(2);
+    const token=(length)=>(rand()+rand()+rand()+rand()).substr(0,length);
+    var link = token(5);
     var delta = quill.getContents();
     if (author != "") {
         if (title != "") {
             if (delta != '{"ops":[{"insert":"n"}]}') {
                 if (delta != '{"ops":[{"insert":""}]}') {
-                    if (isCyrillic(title) === false) {
-                        if (isCyrillic(author) === false) {
-                            $.post("/cpapi", { cyrauthor: stripedauthor, cyrheadline: stripedtitle, urltitle: stripedtitle, urlauthor: stripedauthor, content: JSON.stringify(delta) });
+                            $.post("/cpapi", { token: link, cyrauthor: stripedauthor, cyrheadline: stripedtitle, content: JSON.stringify(delta) });
                             setTimeout(() => {
-                                window.location.href = "/" + stripedauthor + "-" + stripedtitle;
-                            }, 1500);
-                        } else {
-                            var transedtitle = transliterate(stripedtitle);
-                            var transedauthor = transliterate(stripedauthor);
-                            $.post("/cpapi", { cyrauthor: stripedauthor, cyrheadline: stripedtitle, urlauthor: transedauthor, urltitle: transedtitle, content: JSON.stringify(delta) });
-                            setTimeout(() => {
-                                window.location.href = "/" + transedauthor + "-" + transedtitle;
-                            }, 1500);
-                        }
-                    } else {
-                        var transedtitle = transliterate(stripedtitle);
-                        var transedauthor = transliterate(stripedauthor);
-                        $.post("/cpapi", { cyrauthor: stripedauthor, cyrheadline: stripedtitle, urlauthor: transedauthor, urltitle: transedtitle, content: JSON.stringify(delta) });
-                        setTimeout(() => {
-                            window.location.href = "/" + transedauthor + "-" + transedtitle;
-                        }, 1500);
-                    }
+                                window.location.href = "/" + link;
+                            }, 500);
                 }
             }
         }
@@ -88,19 +70,3 @@ document.getElementById("SUBMIT").addEventListener("click", function () {
 document.getElementById("SUBMIT").addEventListener("click", func1);
 let el = document.getElementById("TITLETEXT");
 let el2 = document.getElementById("AUTHORNAME");
-el.onkeypress = function (e) {
-    var prohibited = "-#<>_";
-    var key = String.fromCharCode(e.which);
-    if (prohibited.indexOf(key) >= 0) {
-        return false;
-    }
-    return true;
-};
-el2.onkeypress = function (e) {
-    var prohibited = "-#<>_";
-    var key = String.fromCharCode(e.which);
-    if (prohibited.indexOf(key) >= 0) {
-        return false;
-    }
-    return true;
-};

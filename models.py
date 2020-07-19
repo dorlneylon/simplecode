@@ -7,13 +7,12 @@ db = SQLAlchemy(app)
 class Page(db.Model):
     """
     Description: table for saving data users insert. Being used to get and insert data.
-    Columns: id(inserts automatically), cyrtitle, cyrauthor, urltitle, urlauthor, text, date(inserts automatically).
+    Columns: id(inserts automatically), cyrtitle, cyrauthor, token, text, date(inserts automatically).
     """
     id = db.Column(db.Integer, primary_key=True)
     cyrtitle = db.Column(db.String, nullable=False)
     cyrauthor = db.Column(db.String)
-    urltitle = db.Column(db.String, nullable=False)
-    urlauthor = db.Column(db.String)
+    token = db.Column(db.String, nullable=False)
     text = db.Column(db.String, nullable=False)
     date = db.Column(db.DateTime, default=datetime.datetime.now)
 

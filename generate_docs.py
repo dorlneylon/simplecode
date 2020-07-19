@@ -22,19 +22,19 @@ Models = [
 Routes = [
     Route("/", "home", ["GET", "POST"], True, home.__doc__),
     Route("/-", "getback", ["GET", "POST"], True, getback.__doc__),
-    Route("/{Author}-{Title}", "get_lel", ["GET", "POST"], True, get_lel.__doc__),
+    Route("/<token>", "get_lel", ["GET", "POST"], True, get_lel.__doc__),
     Route("/createpost", "createOne", ["POST"], True, createOne.__doc__),
     Route("/checkpost", "checkpost", ["POST"], True, checkpost.__doc__),
-    Route("/cpapi", "cpapi", ["POST"], True, cpapi.__doc__)
+    Route("/cpapi", "cpapi", ["POST"], True, cpapi.__doc__),
+    Route("/index", "index", ["POST"], True, index.__doc__)
 ]
 
 def generate_docs():
     with open("docs.md", "w") as docs:
-        docs.writelines("# Routes and info about them.\n\n")
-        docs.writelines("| Route | function | methods | Is working? |\n")
-        docs.writelines("| ------------- | -------- | -------- | -------- |\n")
+        docs.writelines(["# Routes and info about them.\n\n", "| Route | function | methods | Is working? |\n", "| ------------- | -------- | -------- | -------- |\n"])
         for route in Routes:
-            docs.writelines(f"| {route.path} | {route.function} | {route.methods} | {route.working} |\n")
+            path = route.path.replace("<", "\<").replace(">", "\>")
+            docs.writelines(f"| {path} | {route.function} | {route.methods} | {route.working} |\n")
         for route in Routes:
             docs.writelines([f"\n## {route.function}'s docs:", f"{route.info}".replace("\n    ", "\n\n")])
         docs.writelines("\n\n# Models.\n")
