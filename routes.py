@@ -6,12 +6,11 @@ from sqlalchemy.exc import IntegrityError
 import json
 from delta import html
 from html2text import html2text
-from transliterate import translit
 
 @app.route('/<token>', methods=['GET', 'POST'])
 def get_lel(token):
     """
-    Description: Here you can see what have you or somebody published recently. Make sure, that more than max-posts-available(check config.cfg and edit it if you want) posts at once are not allowed on this site.
+    Description: Here you can see what you or somebody has published recently. Make sure, that more than max-posts-available(check config.cfg and edit it if you want) posts at once are not allowed on this site.
     Possible errors: 404.
     Output example: page with data.
     """
@@ -45,7 +44,7 @@ def home():
 def createOne():
     """
     Requires: author, title, content.
-    Description: Page where you can create a post if it doesn't exist yet. Make sure that you can't use Rich Text Editor with this thing.
+    Description: Page where you can create a post if it doesn't exist yet. To make text formatted use markdown syntax. MARKDOWN BARELY WORKS.
     Possible errors: KeyError, IntegrityError.
     Output example: { "link" : "/token", "author" : testauthor, "title" : testtitle, "content" : testcontent, "publish date" : testdate }.
     """
@@ -78,7 +77,7 @@ def createOne():
 @app.route('/cpapi', methods=["POST"])
 def cpapi():
     """
-    Requires: cyryllic author's name, cyryllic title, token, content.
+    Requires: author's name, title, token, content.
     Description: cpapi - create post using api. There's no need to go on that page, cuz it is being used only create a post by "submit" button.
     Possible errors: KeyError, IntegrityError.
     Output: 200.
@@ -87,6 +86,9 @@ def cpapi():
     cyrauthor = request.form['cyrauthor']
     token = request.form['token']
     text = request.form['content']
+    rows = db.session.query(Page).count()
+    if rows > POSTS_LIMIT:
+        Page.query.delete()
     try:
         data = Page(cyrtitle=cyrtitle, cyrauthor=cyrauthor, token=token, text=text)
         db.session.add(data)
@@ -128,7 +130,7 @@ def checkpost():
 @app.route('/-', methods=['GET', 'POST'])
 def getback():
     """
-    Description: This page was created just to make sure people are not trying to publish empty fields. In the newer version of this site JS already checks that, though.
+    Description: This page was created just to make sure people are not trying to publish empty fields. In the newest version of this site JS creates tokens instead, though.
     """
     return redirect('/')
 

@@ -8,7 +8,7 @@
 | /createpost | createOne | ['POST'] | True |
 | /checkpost | checkpost | ['POST'] | True |
 | /cpapi | cpapi | ['POST'] | True |
-| /index | index | ['POST'] | True |
+| /index | index | ['GET', 'POST'] | True |
 
 ## home's docs:
 
@@ -17,12 +17,12 @@ Description: Home page where you're able to create a post or to check how to use
 
 ## getback's docs:
 
-Description: This page was created just to make sure people are not trying to publish empty fields. In the newer version of this site JS already checks that, though.
+Description: This page was created just to make sure people are not trying to publish empty fields. In the newest version of this site JS creates tokens instead, though.
 
 
 ## get_lel's docs:
 
-Description: Here you can see what have you or somebody published recently. Make sure, that more than max-posts-available(check config.cfg and edit it if you want) posts at once are not allowed on this site.
+Description: Here you can see what you or somebody has published recently. Make sure, that more than max-posts-available(check config.cfg and edit it if you want) posts at once are not allowed on this site.
 
 Possible errors: 404.
 
@@ -33,7 +33,7 @@ Output example: page with data.
 
 Requires: author, title, content.
 
-Description: Page where you can create a post if it doesn't exist yet. Make sure that you can't use Rich Text Editor with this thing.
+Description: Page where you can create a post if it doesn't exist yet. To make text formatted use markdown syntax. MARKDOWN BARELY WORKS.
 
 Possible errors: KeyError, IntegrityError.
 
@@ -53,7 +53,7 @@ Output example: { "link" : "/token", "author" : testauthor, "title" : testtitle,
 
 ## cpapi's docs:
 
-Requires: cyryllic author's name, cyryllic title, token, content.
+Requires: author's name, title, token, content.
 
 Description: cpapi - create post using api. There's no need to go on that page, cuz it is being used only create a post by "submit" button.
 

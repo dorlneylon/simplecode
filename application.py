@@ -3,7 +3,7 @@ import os
 
 application = app = Flask(__name__)
 
-from app_config import HOST, PORT, DEBUG, POSTS_LIMIT, SQLALCHEMY_TRACK_MODS
+from app_config import HOST, PORT, DEBUG, POSTS_LIMIT, SQLALCHEMY_TRACK_MODS, THREADED
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODS
@@ -15,5 +15,6 @@ if __name__ == "__main__":
     app.run(
         host=HOST,
         debug=DEBUG,
-        port=PORT
+        port=PORT,
+        threaded=THREADED
     )

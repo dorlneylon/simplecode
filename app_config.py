@@ -2,6 +2,7 @@ import configparser
 
 config = configparser.ConfigParser()
 config.read('config.cfg')
+THREADED = config.get("main", "threading")
 PORT = config.get("server", "port")
 DEBUG = config.get("main", "debug")
 HOST = config.get("server", "host")
