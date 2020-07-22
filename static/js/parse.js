@@ -36,30 +36,34 @@ var quill = new Quill("#INPUTTEXT", {
     placeholder: "Your content..",
     theme: "bubble"
 });
-
 quill.root.setAttribute("spellcheck", false);
+
 function func1() {
-    var title = tiquill.root.innerText;
-    var stripedtitle = title;
-    var author = aquill.root.innerText;
-    var stripedauthor = author;
     const rand=()=>Math.random(0).toString(36).substr(2);
     const token=(length)=>(rand()+rand()+rand()+rand()).substr(0,length);
     var link = token(5);
+    var title = tiquill.root.innerText;
+    var author = aquill.root.innerText;
     var delta = quill.getContents();
-    if (author != "") {
-        if (title != "") {
+    if (author.length > 2) {
+        if (title.length > 2) {
             if (delta != '{"ops":[{"insert":"n"}]}') {
                 if (delta != '{"ops":[{"insert":""}]}') {
-                            $.post("/cpapi", { token: link, cyrauthor: stripedauthor, cyrheadline: stripedtitle, content: JSON.stringify(delta) });
+                            $.post("/cpapi", { token: link, cyrauthor: author, cyrheadline: title, content: JSON.stringify(delta) });
                             setTimeout(() => {
                                 window.location.href = "/" + link;
-                            }, 500);
+                            }, 1000);
                 }
             }
         }
     }
 }
+quill.on("text-change", function () {
+    if (document.querySelector(".ql-syntax") != null) {
+        document.querySelector(".ql-syntax").classList.add("hljs");
+    }
+})
+
 document.getElementById("SUBMIT").addEventListener("click", function () {
     try {
         document.querySelector(".ql-syntax").innerHTML = document.querySelector(".ql-syntax").innerHTML.split("                                        ").join("&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;").split("                                    ").join("&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;").split("                                ").join("&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;").split("                            ").join("&#9;&#9;&#9;&#9;&#9;&#9;&#9;").split("                        ").join("&#9;&#9;&#9;&#9;&#9;&#9;").split("                    ").join("&#9;&#9;&#9;&#9;&#9;").split("                ").join("&#9;&#9;&#9;&#9;").split("            ").join("&#9;&#9;&#9;").split("        ").join("&#9;&#9;").split("    ").join("&#9;");
@@ -68,5 +72,3 @@ document.getElementById("SUBMIT").addEventListener("click", function () {
     }
 });
 document.getElementById("SUBMIT").addEventListener("click", func1);
-let el = document.getElementById("TITLETEXT");
-let el2 = document.getElementById("AUTHORNAME");

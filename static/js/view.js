@@ -15,7 +15,7 @@ var quill = new Quill("#INPUTTEXT", {
 
 var html = JSON.parse(document.querySelector(".ql-editor").textContent);
 quill.setContents(html, "api");
-var converter = new showdown.Converter({tables: true, ghCodeBlocks: false});
+var converter = new showdown.Converter({tables: true});
 console.log(document.querySelector(".ql-editor:not(.ql-syntax)").innerHTML);
 console.log(quill.root.innerText);
 document.getElementById("INPUTTEXT").innerHTML = converter.makeHtml(document.querySelector(".ql-editor").innerHTML.split("<p>").join("").split("</p>").join("\n").split("&nbsp;").join(" ").split("||").join("|\n|")).split("\n,").join("\n")

@@ -1,12 +1,14 @@
 from application import app, POSTS_LIMIT
 from flask import render_template, request, jsonify, redirect
 from models import Page, db
+from middleware import posts_limiter
 import uuid
 from sqlalchemy.exc import IntegrityError
 import json
 from delta import html
 from html2text import html2text
 
+@posts_limiter
 @app.route('/<token>', methods=['GET', 'POST'])
 def get_lel(token):
     """
@@ -17,9 +19,6 @@ def get_lel(token):
     if request.method == 'POST':
         return jsonify({ "message" : "To get data from post using POST method go to /checkpost page with author and title fields." })
     elif request.method == 'GET':
-        rows = db.session.query(Page).count()
-        if rows > POSTS_LIMIT:
-            Page.query.delete()
         data = Page.query.filter_by(token=token).first()
         if data is not None:
             authorname = str(data.cyrauthor)
@@ -30,6 +29,7 @@ def get_lel(token):
         else:
             return render_template('404.html')
 
+@posts_limiter
 @app.route('/', methods=['GET', 'POST'])
 def home():
     """
@@ -40,6 +40,7 @@ def home():
     elif request.method == "POST":
         return jsonify({ "message": "To create a post simply go on /createpost with POST method with 'author', 'title' and the 'content' fields. If you want to check any post then just go on /checkpost with 'author' and 'title' fields fulfilled." })
 
+@posts_limiter
 @app.route('/createpost', methods=['POST'])
 def createOne():
     """
@@ -74,6 +75,7 @@ def createOne():
     datevalue = str(data.date)[:10]
     return jsonify({ "link" : f"/{token}", "author" : authorname, "title" : headlinename, "content" : contentname, "publish date" : datevalue })
 
+@posts_limiter
 @app.route('/cpapi', methods=["POST"])
 def cpapi():
     """
@@ -86,9 +88,6 @@ def cpapi():
     cyrauthor = request.form['cyrauthor']
     token = request.form['token']
     text = request.form['content']
-    rows = db.session.query(Page).count()
-    if rows > POSTS_LIMIT:
-        Page.query.delete()
     try:
         data = Page(cyrtitle=cyrtitle, cyrauthor=cyrauthor, token=token, text=text)
         db.session.add(data)
