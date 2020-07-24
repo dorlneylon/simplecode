@@ -8,11 +8,12 @@ import json
 from delta import html
 from html2text import html2text
 
-@posts_limiter
+
 @app.route('/<token>', methods=['GET', 'POST'])
+@posts_limiter
 def get_lel(token):
     """
-    Description: Here you can see what you or somebody has published recently. Make sure, that more than max-posts-available(check config.cfg and edit it if you want) posts at once are not allowed on this site.
+    Description: Here you can see what you or somebody has published recently.
     Possible errors: 404.
     Output example: page with data.
     """
@@ -29,8 +30,9 @@ def get_lel(token):
         else:
             return render_template('404.html')
 
-@posts_limiter
+
 @app.route('/', methods=['GET', 'POST'])
+@posts_limiter
 def home():
     """
     Description: Home page where you're able to create a post or to check how to use API.
@@ -38,10 +40,11 @@ def home():
     if request.method == "GET":
         return render_template('home.html')
     elif request.method == "POST":
-        return jsonify({ "message": "To create a post simply go on /createpost with POST method with 'author', 'title' and the 'content' fields. If you want to check any post then just go on /checkpost with 'author' and 'title' fields fulfilled." })
+        return jsonify({ "message": "To create a post simply go on /createpost with POST method with 'author', 'title' and the 'content' fields. If you want to check any post then just go on /checkpost with the link to the post you want to get info about." })
 
-@posts_limiter
+
 @app.route('/createpost', methods=['POST'])
+@posts_limiter
 def createOne():
     """
     Requires: author, title, content.
@@ -75,8 +78,9 @@ def createOne():
     datevalue = str(data.date)[:10]
     return jsonify({ "link" : f"/{token}", "author" : authorname, "title" : headlinename, "content" : contentname, "publish date" : datevalue })
 
-@posts_limiter
+
 @app.route('/cpapi', methods=["POST"])
+@posts_limiter
 def cpapi():
     """
     Requires: author's name, title, token, content.
@@ -94,7 +98,7 @@ def cpapi():
         db.session.commit()
     except:
         return "<h1> Something went wrong! </h1>"
-    return "200"
+    return "201"
 
 @app.route('/checkpost', methods=["POST"])
 def checkpost():

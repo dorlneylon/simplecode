@@ -58,11 +58,6 @@ function func1() {
         }
     }
 }
-quill.on("text-change", function () {
-    if (document.querySelector(".ql-syntax") != null) {
-        document.querySelector(".ql-syntax").classList.add("hljs");
-    }
-})
 
 document.getElementById("SUBMIT").addEventListener("click", function () {
     try {

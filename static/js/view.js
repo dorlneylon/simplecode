@@ -5,21 +5,22 @@ hljs.configure({
 var quill = new Quill("#INPUTTEXT", {
     modules: {
         syntax: true,
+        table: true,
         toolbar: [
             [{ header: [1, 2, false] }],
              ["bold", "italic", "underline", "strike"],
               ["blockquote", "image", "code-block"]
         ] },
         theme: "bubble",
-        readOnly: true });
+        readOnly: true 
+    });
 
 var html = JSON.parse(document.querySelector(".ql-editor").textContent);
 quill.setContents(html, "api");
-var converter = new showdown.Converter({tables: true});
-console.log(document.querySelector(".ql-editor:not(.ql-syntax)").innerHTML);
-console.log(quill.root.innerText);
-document.getElementById("INPUTTEXT").innerHTML = converter.makeHtml(document.querySelector(".ql-editor").innerHTML.split("<p>").join("").split("</p>").join("\n").split("&nbsp;").join(" ").split("||").join("|\n|")).split("\n,").join("\n")
-console.log(document.getElementById("INPUTTEXT").innerHTML);
+console.log(quill.root.innerHTML);
+console.log(quill.root.innerHTML.split("<p><br></p>").join("").split("<p>").join("").split("</p>").join("\n"));
+var converter = new showdown.Converter({tables: true, underline: true});
+document.querySelector("#INPUTTEXT").innerHTML = converter.makeHtml(quill.root.innerHTML.split("<p><br></p>").join("").split("<p>").join("").split("</p>").join("\n").split("</em>").join("</em>\n").split("</strong>").join("</strong>\n").split("</u>").join("</u>\n"));
 document.querySelectorAll('pre').forEach((block) => {
     hljs.highlightBlock(block);
 });

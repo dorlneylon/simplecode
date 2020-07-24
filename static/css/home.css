@@ -183,6 +183,13 @@ blockquote {
     font-size: 22px;
 }
 
+.ql-syntax {
+    display: block;
+    box-sizing: border-box;
+    min-width: 1000px;
+    overflow: auto;
+}
+
 ::selection { background:#dbdbdb }
 
 ::-moz-selection { background:#dbdbdb }

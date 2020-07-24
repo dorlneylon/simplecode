@@ -22,7 +22,7 @@ Description: This page was created just to make sure people are not trying to pu
 
 ## get_lel's docs:
 
-Description: Here you can see what you or somebody has published recently. Make sure, that more than max-posts-available(check config.cfg and edit it if you want) posts at once are not allowed on this site.
+Description: Here you can see what you or somebody has published recently.
 
 Possible errors: 404.
 
@@ -75,4 +75,12 @@ Description: simple redirect if you want to use /index.
 Description: table for saving data users insert. Being used to get and insert data.
 
 Columns: id(inserts automatically), cyrtitle, cyrauthor, token, text, date(inserts automatically).
+
+
+# Decorators.
+
+
+## posts_limiter's docs:
+
+Description: this decorator was created to check if there's more posts at once than needed. If so, it'll clean the query. You can change max-posts-available number in config.cfg.
 
