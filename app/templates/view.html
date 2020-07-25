@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/vs2015.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
+    <script src="https://code.angularjs.org/1.8.0/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.8.0/angular-sanitize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
+    <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js" type="text/javascript"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/2.0.0-dev.3/quill.min.js" type="text/javascript"></script> -->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quill.css') }}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}">
+    <title>SimpleCode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@1,500&display=swap" rel="stylesheet", type="text/css">
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <meta charset="UTF-8">
+    {% block head %}
+    <h1><a href="/">SimpleCode</a></h1>
+    {% endblock %}
+</head>
+<body>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&display=swap" rel="stylesheet">
+    {% block body %}
+<div class="sides" contenteditable="false" dir="auto">
+    <div class="form" contenteditable="false" dir="auto" id="T">
+        <h1 class="labelfortitle">Title</h1><h1 class="empty" id="TITLETEXT" spellcheck="false" contenteditable="false">{{ title }}<br></h1>
+    </div>
+    <div class="form" contenteditable="false" dir="auto">
+    <section>
+        <address class="labelforauthor">Author</address><address name="A" contenteditable="false" spellcheck="false" id="AUTHORNAME" class="empty">{{ author }}<br></address>
+    </section>
+    </div>
+    <div class="form" contenteditable="false" dir="auto">
+        <address class="labelfordate">Publish date</address><address name="d" contenteditable="false" spellcheck="false" id="Datetime" class="empty">{{ date }}<br></address>
+    </div>
+        <p class="labelforcontent">Content</p>
+    <div class="form" contenteditable="false" dir="auto">
+        <p class="empty" name="C" contenteditable="false" spellcheck="false" id="INPUTTEXT">
+            {{ content }}
+        </p>
+        <br>
+    </div>
+</div>
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/view.js') }}"></script>
+</body>
+</html>
