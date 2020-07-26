@@ -45,11 +45,8 @@ a:hover {
     font-size: medium;
 }
 th {
-    padding-right: 6px;
     border: 1px solid black;
-    padding-left: 6px;
-    padding-top: 0;
-    padding-bottom: 4px;
+    padding: 6px;
 }
 
 td {
@@ -147,6 +144,10 @@ blockquote {
 
 .ql-syntax {
     width: 1000px;
+}
+
+td {
+    padding: 7px;
 }
 
 ::selection {
