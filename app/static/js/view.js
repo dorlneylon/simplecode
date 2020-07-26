@@ -20,9 +20,9 @@ try {
 var converter = new showdown.Converter({tables: true, underline: true});
 let mdhtml = document.querySelector(".ql-editor").innerHTML.split("<pre");
 if (mdhtml[1] != null) {
-    document.querySelector("#INPUTTEXT").innerHTML = converter.makeHtml(mdhtml[0].split("|</p>").join("|\n").split("<p>|").join("|").split("<p>").join("").split("</p>").join("<br>")) + "<pre" + mdhtml[1];
+    document.querySelector("#INPUTTEXT").innerHTML = converter.makeHtml(mdhtml[0].split("|</p>").join("|\n").split("<p>|").join("|").split("<p></p>").join("")) + "<pre" + mdhtml[1];
 } else {
-    document.querySelector("#INPUTTEXT").innerHTML = converter.makeHtml(mdhtml[0].split("|</p>").join("|\n").split("<p>|").join("|").split("<p>").join("").split("</p>").join("<br>"));
+    document.querySelector("#INPUTTEXT").innerHTML = converter.makeHtml(mdhtml[0].split("|</p>").join("|\n").split("<p>|").join("|").split("<p></p>").join(""));
 };
 document.querySelectorAll('pre').forEach((block) => {
     hljs.highlightBlock(block);
