@@ -4,7 +4,6 @@ Quill.register("modules/tables", function (quill, options) {
         if (button.classList.contains("ql-active") === true) {
             button.classList.remove("ql-active");
             quill.root.dataset.placeholder = "Your content..";
-            $(".ql-editor").empty();
             document.querySelector(".fa-table").classList.remove("ql-active");
             if (window.innerWidth < 993) {
                 $('#SUBMIT').css({ 'margin-top': '5%' });
