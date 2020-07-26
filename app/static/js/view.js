@@ -5,7 +5,6 @@ hljs.configure({
 var quill = new Quill("#INPUTTEXT", {
     modules: {
         syntax: true,
-        // table: true,
         toolbar: [
             [{ header: [1, 2, false] }],
              ["bold", "italic", "underline", "strike"],
@@ -19,8 +18,12 @@ try {
     quill.setContents(html, "api");
 } catch (e) {};
 var converter = new showdown.Converter({tables: true, underline: true});
-document.querySelector("#INPUTTEXT").innerHTML = converter.makeHtml(quill.root.innerHTML.split("<p><br></p>").join("").split("</p>").join("<br>").split("<p>|").join("|").split("|<br>|").join("|\n|").split("|<br></p>").join("|"));
-
+let mdhtml = document.querySelector(".ql-editor").innerHTML.split("<pre");
+if (mdhtml[1] != null) {
+    document.querySelector("#INPUTTEXT").innerHTML = converter.makeHtml(mdhtml[0].split("|</p>").join("|\n").split("<p>|").join("|").split("<p>").join("").split("</p>").join("<br>")) + "<pre" + mdhtml[1];
+} else {
+    document.querySelector("#INPUTTEXT").innerHTML = converter.makeHtml(mdhtml[0].split("|</p>").join("|\n").split("<p>|").join("|").split("<p>").join("").split("</p>").join("<br>"));
+};
 document.querySelectorAll('pre').forEach((block) => {
     hljs.highlightBlock(block);
 });
