@@ -9,6 +9,8 @@
 | /checkpost | checkpost | ['POST'] | True |
 | /cpapi | cpapi | ['POST'] | True |
 | /index | index | ['GET', 'POST'] | True |
+| /unpublished | unpublished | ['POST'] | True |
+| /checkunpub | checkunpub | ['POST'] | True |
 
 ## home's docs:
 
@@ -33,7 +35,7 @@ Output example: page with data.
 
 Requires: author, title, content.
 
-Description: Page where you can create a post if it doesn't exist yet. To make text formatted use markdown syntax. MARKDOWN BARELY WORKS.
+Description: Page where you can create a post if it doesn't exist yet.
 
 Possible errors: KeyError, IntegrityError.
 
@@ -65,6 +67,12 @@ Output: 200.
 ## index's docs:
 
 Description: simple redirect if you want to use /index.
+
+
+## unpublished's docs:
+
+
+## checkunpub's docs:
 
 
 

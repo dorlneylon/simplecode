@@ -37,7 +37,9 @@ Routes = [
     Route("/createpost", "createOne", createOne, ["POST"], True, createOne.__doc__),
     Route("/checkpost", "checkpost", checkpost, ["POST"], True, checkpost.__doc__),
     Route("/cpapi", "cpapi", cpapi, ["POST"], True, cpapi.__doc__),
-    Route("/index", "index", index, ["GET", "POST"], True, index.__doc__)
+    Route("/index", "index", index, ["GET", "POST"], True, index.__doc__),
+    Route("/unpublished", "unpublished", unpublished, ["POST"], True, unpublished.__doc__ or "None yet"),
+    Route("/checkunpub", "checkunpub", checkunpub, ["POST"], True, checkunpub.__doc__ or "None yet")
 ]
 
 def generate_docs():
@@ -55,7 +57,7 @@ def generate_docs():
         for decorator in Decorators:
             docs.writelines([f"\n## {decorator.function}'s docs:", f"{decorator.info}".replace("\n    ", "\n\n")])
     with open("README.md", "w") as rm:
-        rm.writelines(["# SimpleCode.\n", "### SimpleCode was created for coders who want to use something like Pastebin but Pastebin is not simple in using(I mean various posts, Outstanding API, etc.).\n", "SimpleCode does look like Telegra.ph, because I wanted it to look beautiful.\n", "SimpleCode uses QuillJS and Markdown so you can easily get your text formatted.\n", "Markdown works kinda funny, though =)\n", "# Usage.\n", "### Firstly, install requirements.\n", "``` pip install -r requirements.txt ```\n", "### Now we want to generate the newest version of documentation.\n", "``` python docs_creator.py ```\n", "### From this moment we have to read docs =)\n", "### Well, now just use this :)\n", "```python start.py```"])
+        rm.writelines(["# SimpleCode.\n", "### SimpleCode was created for coders who want to use something like Pastebin but Pastebin is not simple in using(I mean various posts, Outstanding API, etc.).\n", "SimpleCode does look like Telegra.ph, because I wanted it to look beautiful.\n", "SimpleCode uses QuillJS and Markdown so you can easily get your text formatted.\n", "Markdown still doesn't work w APi, though =)\n", "# Usage.\n", "### Firstly, install requirements.\n", "``` pip install -r requirements.txt ```\n", "### Now we want to generate the newest version of documentation.\n", "``` python docs_creator.py ```\n", "### From this moment we have to read docs =)\n", "### Well, now just use this :)\n", "```python start.py```"])
 
 if __name__ == "__main__":
     generate_docs()

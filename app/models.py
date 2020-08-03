@@ -19,5 +19,15 @@ class Page(db.Model):
     def __repr__(self):
         return f'<Paste {self.id}>'
 
+class Unpublished(db.Model):
+    """
+    Table for loading unpublished stuff.
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    ip = db.Column(db.String)
+    title = db.Column(db.String)
+    author = db.Column(db.String)
+    content = db.Column(db.String)
+
 if __name__ == "__main__":
     db.create_all()

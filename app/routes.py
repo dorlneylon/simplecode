@@ -1,5 +1,5 @@
 from flask import render_template, request, jsonify, redirect
-from .models import Page, db
+from .models import Page, Unpublished, db
 from .middleware import posts_limiter
 import uuid
 from sqlalchemy.exc import IntegrityError
@@ -17,7 +17,7 @@ def get_lel(token):
     Output example: page with data.
     """
     if request.method == 'POST':
-        return jsonify({ "message" : "To get data from post using POST method go to /checkpost page with author and title fields." })
+        return jsonify({ "message" : "To get data from post using POST method go to /checkpost page with post's link." })
     elif request.method == 'GET':
         data = Page.query.filter_by(token=token).first()
         if data is not None:
@@ -45,7 +45,7 @@ def home():
 def createOne():
     """
     Requires: author, title, content.
-    Description: Page where you can create a post if it doesn't exist yet. To make text formatted use markdown syntax. MARKDOWN BARELY WORKS.
+    Description: Page where you can create a post if it doesn't exist yet.
     Possible errors: KeyError, IntegrityError.
     Output example: { "link" : "/token", "author" : testauthor, "title" : testtitle, "content" : testcontent, "publish date" : testdate }.
     """
@@ -136,3 +136,30 @@ def index():
     Description: simple redirect if you want to use /index.
     """
     return redirect("/")
+
+def unpublished():
+    """
+    """
+    ipaddress = request.form['ip']
+    title = request.form['title']
+    author = request.form['author']
+    text = request.form['text']
+    data = Unpublished.query.filter_by(ip=ipaddress).all()
+    if data is not None:
+        for field in data:
+            db.session.delete(field)
+        data = Unpublished(ip=ipaddress, title=title, author=author, content=text)
+        db.session.add(data)
+        db.session.commit()
+    else:
+        data = Unpublished(ip=ipaddress, title=title, author=author, content=text)
+        db.session.add(data)
+        db.session.commit()
+    return "200"
+
+def checkunpub():
+    """
+    """
+    ipaddress = request.form['ip']
+    data = Unpublished.query.filter_by(ip=ipaddress).all()[-1]
+    return jsonify({ "author" : data.author, "title" : data.title, "text" : data.content })
