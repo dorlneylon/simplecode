@@ -71,8 +71,20 @@ Description: simple redirect if you want to use /index.
 
 ## unpublished's docs:
 
+Requires: ip address, title, author, content, inserts.
+
+Description: send temporary user's inserts so if he reopens the window it'll automatically restore his lost data.
+
+Output: 201.
+
 
 ## checkunpub's docs:
+
+Requires: ip address.
+
+Description: if users reopens the window this route'll restore his lost data.
+
+Ouput example: { "author" : author, "title" : title, "text" : content }.
 
 
 
@@ -82,7 +94,14 @@ Description: simple redirect if you want to use /index.
 
 Description: table for saving data users insert. Being used to get and insert data.
 
-Columns: id(inserts automatically), cyrtitle, cyrauthor, token, text, date(inserts automatically).
+Columns: id(primary key), title, author's name, token(link), content, date(inserts automatically).
+
+
+## Unpublished's docs:
+
+Description: a table for loading unpublished stuff. Being edited every 5 seconds.
+
+Columns: id(primary key), ip, title, author's name, content.
 
 
 # Decorators.

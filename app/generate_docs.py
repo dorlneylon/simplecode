@@ -1,5 +1,5 @@
 from .middleware import posts_limiter
-from .models import Page
+from .models import Page, Unpublished
 from dataclasses import dataclass
 from .routes import *
 
@@ -23,7 +23,8 @@ class Decorator:
     info: str
 
 Models = [
-    Model("Page", Page.__doc__)
+    Model("Page", Page.__doc__),
+    Model("Unpublished", Unpublished.__doc__)
 ]
 
 Decorators = [
@@ -38,8 +39,8 @@ Routes = [
     Route("/checkpost", "checkpost", checkpost, ["POST"], True, checkpost.__doc__),
     Route("/cpapi", "cpapi", cpapi, ["POST"], True, cpapi.__doc__),
     Route("/index", "index", index, ["GET", "POST"], True, index.__doc__),
-    Route("/unpublished", "unpublished", unpublished, ["POST"], True, unpublished.__doc__ or "None yet"),
-    Route("/checkunpub", "checkunpub", checkunpub, ["POST"], True, checkunpub.__doc__ or "None yet")
+    Route("/unpublished", "unpublished", unpublished, ["POST"], True, unpublished.__doc__),
+    Route("/checkunpub", "checkunpub", checkunpub, ["POST"], True, checkunpub.__doc__)
 ]
 
 def generate_docs():

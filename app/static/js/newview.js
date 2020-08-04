@@ -13056,7 +13056,7 @@
                 ],
             }
         },
-        formats: ['bold', 'italic', 'blockquote', 'size', 'underline', 'code-block', 'list', 'header'],
+        formats: ['bold', 'italic', 'blockquote', "link", "strike", 'size', 'underline', 'code-block', 'list', 'header'],
         placeholder: "Your content..",
         theme: "bubble",
         readOnly: true

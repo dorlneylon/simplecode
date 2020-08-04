@@ -59,21 +59,7 @@ def createOne():
     data = Page.query.filter_by(cyrauthor=an, cyrtitle=ti).first()
     if data is not None:
         return jsonify({ "message" : "This post already exists!" })
-    else:
-        try:
-            Token = str(uuid.uuid4())[:5]
-            data = Page(cyrtitle=ti, cyrauthor=an, token=Token, text=ct)
-            db.session.add(data)
-            db.session.commit()
-        except:
-            return jsonify({ "message" : "Something went wrong! Try again." })
-    data = Page.query.filter_by(token=Token).first()
-    authorname = str(data.cyrauthor)
-    headlinename = str(data.cyrtitle)
-    token = data.token
-    contentname = data.text
-    datevalue = str(data.date)[:10]
-    return jsonify({ "link" : f"/{token}", "author" : authorname, "title" : headlinename, "content" : contentname, "publish date" : datevalue })
+    return insert(author=an, title=ti, content=ct)
 
 
 @posts_limiter
@@ -88,6 +74,11 @@ def cpapi():
     cyrauthor = request.form['cyrauthor']
     token = request.form['token']
     text = request.form['content']
+    ipaddress = request.form['ip']
+    up = Unpublished.query.filter_by(ip=ipaddress).all()
+    if up is not None:
+        for field in up:
+            db.session.delete(field)
     try:
         data = Page(cyrtitle=cyrtitle, cyrauthor=cyrauthor, token=token, text=text)
         db.session.add(data)
@@ -139,6 +130,9 @@ def index():
 
 def unpublished():
     """
+    Requires: ip address, title, author, content, inserts.
+    Description: send temporary user's inserts so if he reopens the window it'll automatically restore his lost data.
+    Output: 201.
     """
     ipaddress = request.form['ip']
     title = request.form['title']
@@ -155,11 +149,17 @@ def unpublished():
         data = Unpublished(ip=ipaddress, title=title, author=author, content=text)
         db.session.add(data)
         db.session.commit()
-    return "200"
+    return "201"
 
 def checkunpub():
     """
+    Requires: ip address.
+    Description: if users reopens the window this route'll restore his lost data.
+    Ouput example: { "author" : author, "title" : title, "text" : content }.
     """
     ipaddress = request.form['ip']
-    data = Unpublished.query.filter_by(ip=ipaddress).all()[-1]
+    try:
+        data = Unpublished.query.filter_by(ip=ipaddress).all()[-1]
+    except IndexError:
+        data = Unpublished.query.filter_by(ip=ipaddress).first()
     return jsonify({ "author" : data.author, "title" : data.title, "text" : data.content })
