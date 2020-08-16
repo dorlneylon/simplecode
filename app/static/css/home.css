@@ -39,18 +39,6 @@ a:hover {
     color: #000;
 }
 
-#TITLETEXT::before {
-    content: attr(data-placeholder);
-    font-family: 'Lora', serif;
-    position: absolute;
-    margin-left: -6%;
-    color: rgb(88, 88, 88);
-}
-
-#TITLETEXT:focus::before {
-    font-family: 'Lora', serif;
-}
-
 #AUTHORNAME {
     font-family: 'Lora', serif;
     width: 80%;
@@ -63,19 +51,6 @@ a:hover {
     font-size: medium;
     }
 
-#AUTHORNAME::before {
-    content: attr(data-placeholder);
-    font-family: 'Lora', serif;
-    position: absolute;
-    margin-left: -5%;
-    color: rgb(88, 88, 88);
-}
-
-#AUTHORNAME:focus::before { 
-    font-family: 'Lora', serif;
-    color: rgb(34, 34, 34); 
-}
-
 #INPUTTEXT {
     font-family: 'Lora', serif;
     width: 80%;
@@ -87,20 +62,6 @@ a:hover {
     border: none;
     background: transparent;
     font-size: large;
-}
-
-#INPUTTEXT:focus::before {
-    content: attr(data-placeholder);
-    font-family: 'Lora', serif; 
-    color: rgb(34, 34, 34); 
-}
-
-#INPUTTEXT::before {
-    content: attr(data-placeholder);
-    font-family: 'Lora', serif;
-    position: absolute;
-    margin-left: -5%;
-    color: rgb(88, 88, 88);
 }
 
 .sides {
@@ -123,6 +84,11 @@ a:hover {
     padding: 4em 1em;
 }
 
+pre {
+    color: white;
+    background-color: rgb(27, 27, 27);
+}
+
 .button-parent a {
     text-decoration: none;
     font-weight: 500;
@@ -135,25 +101,9 @@ a:hover {
 padding-bottom: 2em;
 }
 
-.fa {
-    font-size: 18px;
-    position: absolute;
-    margin-top: -8px;
-    margin-left: -7px;
-    color: #ccc;
-}
-
-.fa:hover {
-    color: #fff;
-}
 
 .ql-active {
     color: #fff;
-}
-
-.ql-small-md {
-    font-style: normal;
-    right: 0;
 }
 
 .btn-1 {
@@ -211,6 +161,54 @@ blockquote {
     overflow: auto;
 }
 
+.warn {
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    padding-left: 70px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    position: absolute;
+    margin-right: 15px;
+    margin-top: -20%;
+    margin-left: 80%;
+    border-radius: 30px;
+    background-color: rgb(40, 40, 40);
+}
+
+.warn-pre {
+    font-family: 'Lora', serif;
+    font-size: 14px;
+    padding-left: 35px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    position: absolute;
+    margin-right: 15px;
+    margin-top: -25%;
+    margin-left: 80%;
+    text-align: center;
+    border-radius: 30px;
+    background-color: rgb(40, 40, 40);
+}
+
+.warn-pre > .fa-code {
+    position: absolute;
+    padding-top: 13px;
+    margin-left: -10%;
+    padding-left: -10px;
+    padding-right: 25px;
+}
+
+.fa-pencil {
+    color: white;
+    position: relative;
+    margin-left: -25%;
+    margin-right: 10%;
+}
+
 ::selection { background:#dbdbdb }
 
 ::-moz-selection { background:#dbdbdb }
@@ -263,18 +261,6 @@ blockquote {
         color: #000;
     }
     
-    #TITLETEXT::before {
-        content: attr(data-placeholder);
-        font-family: 'Lora', serif;
-        position: absolute;
-        margin-left: -6%;
-        color: rgb(88, 88, 88);
-    }
-    
-    #TITLETEXT:focus::before {
-        font-family: 'Lora', serif;
-    }
-    
     #AUTHORNAME {
         font-family: 'Lora', serif;
         width: 80%;
@@ -287,19 +273,6 @@ blockquote {
         font-size: medium;
         }
     
-    #AUTHORNAME::before {
-        content: attr(data-placeholder);
-        font-family: 'Lora', serif;
-        position: absolute;
-        margin-left: -5%;
-        color: rgb(88, 88, 88);
-    }
-    
-    #AUTHORNAME:focus::before { 
-        font-family: 'Lora', serif;
-        color: rgb(34, 34, 34); 
-    }
-    
     #INPUTTEXT {
         font-family: 'Lora', serif;
         width: 80%;
@@ -311,20 +284,6 @@ blockquote {
         border: none;
         background: transparent;
         font-size: large;
-    }
-    
-    #INPUTTEXT:focus::before {
-        content: attr(data-placeholder);
-        font-family: 'Lora', serif; 
-        color: rgb(34, 34, 34); 
-    }
-    
-    #INPUTTEXT::before {
-        content: attr(data-placeholder);
-        font-family: 'Lora', serif;
-        position: absolute;
-        margin-left: -5%;
-        color: rgb(88, 88, 88);
     }
     
     .sides {
@@ -463,17 +422,6 @@ blockquote {
         color: #000;
     }
     
-    #TITLETEXT::before {
-        font-family: 'Lora', serif;
-        position: absolute;
-        margin-left: -6%;
-        color: rgb(88, 88, 88);
-    }
-    
-    #TITLETEXT:focus::before {
-        font-family: 'Lora', serif;
-    }
-    
     #AUTHORNAME {
         font-family: 'Lora', serif;
         width: 95%;
@@ -486,18 +434,6 @@ blockquote {
         font-size: 16px;
     }
     
-    #AUTHORNAME::before {
-        font-family: 'Lora', serif;
-        position: absolute;
-        margin-left: -5%;
-        color: rgb(88, 88, 88);
-    }
-    
-    #AUTHORNAME:focus::before { 
-        font-family: 'Lora', serif;
-        color: rgb(34, 34, 34); 
-    }
-    
     #INPUTTEXT {
         font-family: 'Lora', serif;
         width: 95%;
@@ -508,18 +444,6 @@ blockquote {
         font-size: 20px;
         border: none;
         background: transparent;
-    }
-    
-    #INPUTTEXT:focus::before {
-        font-family: 'Lora', serif;
-        color: rgb(34, 34, 34); 
-    }
-    
-    #INPUTTEXT::before {
-        font-family: 'Lora', serif;
-        position: absolute;
-        margin-left: -5%;
-        color: rgb(88, 88, 88);
     }
 
     #Datetime {
@@ -548,6 +472,39 @@ blockquote {
     blockquote {
         border-left: 2px solid black;
         font-size: 25px;
+    }
+
+    .warn {
+        font-family: 'Lora', serif;
+        font-size: 12px;
+        padding-left: 55px;
+        padding-right: 0;
+        margin-right: 23%;
+        margin-left: 22%;
+        margin-top: -60%;
+        color: white;
+        position: absolute;
+        border-radius: 30px;
+        background-color: rgb(40, 40, 40);
+    }
+
+    .warn-pre {
+        font-family: 'Lora', serif;
+        font-size: 12px;
+        padding-left: 17px;
+        padding-right: 0;
+        margin-right: 20%;
+        margin-left: 22%;
+        margin-top: -60%;
+        color: white;
+        position: absolute;
+        border-radius: 30px;
+        background-color: rgb(40, 40, 40);
+    }
+
+    .fa-pencil {
+        color: white;
+        position: relative;
     }
 
     ::selection {

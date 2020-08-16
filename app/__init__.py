@@ -2,7 +2,7 @@ from flask import Flask
 
 application = app = Flask(__name__)
 
-from .app_config import SQLALCHEMY_TRACK_MODS
+from .app_config import *
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODS

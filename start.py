@@ -1,6 +1,5 @@
 import os
-from app.app_config import HOST, PORT, DEBUG, THREADED
-from app import app, db, init_routes
+from app import HOST, PORT, DEBUG, THREADED, app, db, init_routes
 
 if __name__ == "__main__":
     try:

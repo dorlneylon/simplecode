@@ -1,8 +1,9 @@
-from flask import render_template, request, jsonify, redirect
+from flask import render_template, request, jsonify, redirect, Markup
 from .models import Page, Unpublished, db
 from .middleware import posts_limiter
 import uuid
 from sqlalchemy.exc import IntegrityError
+import markdown2
 import json
 from delta import html
 from html2text import html2text
@@ -21,8 +22,8 @@ def get_lel(token):
     elif request.method == 'GET':
         data = Page.query.filter_by(token=token).first()
         if data is not None:
-            authorname = str(data.cyrauthor)
-            headlinename = str(data.cyrtitle)
+            authorname = Markup(str(data.cyrauthor))
+            headlinename = Markup(str(data.cyrtitle))
             contentname = data.text
             datevalue = str(data.date)[:10]
             return render_template('view.html', author=authorname, title=headlinename, content=contentname, date=datevalue)
@@ -54,13 +55,18 @@ def createOne():
         an = json['author']
         ti = json['title']
         ct = json['content']
+        Token = str(uuid.uuid4())[:5]
     except KeyError:
         return jsonify({ "message" : "Something went wrong. You've probably missed a row. Try again." })
-    data = Page.query.filter_by(cyrauthor=an, cyrtitle=ti).first()
-    if data is not None:
-        return jsonify({ "message" : "This post already exists!" })
-    return insert(author=an, title=ti, content=ct)
+    try:
+        data = Page(cyrtitle=ti, cyrauthor=an, token=Token, text=ct)
+        db.session.add(data)
+        db.session.commit()
+    except:
+        return "409"
 
+    return jsonify({ "link" : f"/{data.token}", "author" : data.cyrauthor, "title" : data.cyrtitle, "content" : data.text, "publish date" : str(data.date)[:10] })
+    # return insert(author=an, title=ti, content=ct)
 
 @posts_limiter
 def cpapi():
@@ -79,12 +85,16 @@ def cpapi():
     if up is not None:
         for field in up:
             db.session.delete(field)
+    fields = Page.query.filter_by(token=token).all()
+    if fields is not None:
+        for field in fields:
+            db.session.delete(field)
     try:
         data = Page(cyrtitle=cyrtitle, cyrauthor=cyrauthor, token=token, text=text)
         db.session.add(data)
         db.session.commit()
     except:
-        return "<h1> Something went wrong! </h1>"
+        return "409"
     return "201"
 
 def checkpost():
