@@ -23,7 +23,6 @@ var contenteditor = new MediumEditor(contentfield, {
         'bold',
         'italic',
         'underline',
-        'orderedlist',
         'quote',
         'h2',
         'h3',
@@ -52,8 +51,8 @@ var titleeditor = new MediumEditor(titlefield, {
     spellcheck: false
 });
 
-document.querySelectorAll(".medium-editor-action")[7].addEventListener("click", function () {
-    if (document.querySelectorAll(".medium-editor-action")[7].classList.contains("medium-editor-button-active") != true) {
+document.querySelectorAll(".medium-editor-action")[6].addEventListener("click", function () {
+    if (document.querySelectorAll(".medium-editor-action")[6].classList.contains("medium-editor-button-active") != true) {
         if ($(window).width() < 993) {
             $(".warn-pre").css({"margin-top" : "-10%"});
             setTimeout(() => {$(".warn-pre").css({"margin-top" : "-60%"})}, 2000);
@@ -68,9 +67,9 @@ $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
         var ipaddress = data["ip"];
         $.post("/checkunpub", { ip: ipaddress }, function (output) {
             if (output != null) {
-                document.querySelector("#AUTHORNAME").innerHTML = output["author"];
-                document.querySelector("#TITLETEXT").innerHTML = output["title"];
-                document.getElementById("INPUTTEXT").innerHTML = output["text"];
+                authoreditor.setContent(output["author"]);
+                titleeditor.setContent(output["title"]);
+                contenteditor.setContent(output["text"]);
             };
         }
         )});

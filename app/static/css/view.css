@@ -21,10 +21,7 @@ a:hover {
     width: 80%;
     box-sizing: border-box;
     margin-top: 50px;
-    border-width: 0 0 0 1px;
     padding-left: 20px;
-    border-style: solid;
-    border-color: rgb(124, 124, 124);
     margin-left: 165px;
     margin-right: 0px;
     background: transparent;
@@ -34,43 +31,30 @@ a:hover {
     font-family: 'Lora', serif;
     width: 80%;
     box-sizing: border-box;
-    margin-top: -4px;
-    border-width: 0 0 0 1px;
+    margin-top: -16px;
     padding-left: 20px;
-    border-style: solid;
-    border-color: rgb(124, 124, 124);
     margin-left: 165px;
     margin-right: 0px;
     background: transparent;
-    font-size: medium;
+    font-size: 15px;
 }
-/* th {
-    border: 1px solid black;
-    padding: 6px;
-} */
 
 pre {
     color: white;
     background-color: rgb(27, 27, 27);
 }
 
-/* td {
-    border: 1px solid black;
-} */
 
 #AUTHORNAME {
     font-family: 'Lora', serif;
     width: 80%;
     box-sizing: border-box;
-    margin-top: 12px;
-    border-width: 0 0 0 1px;
+    margin-top: -6px;
     padding-left: 20px;
-    border-style: solid;
-    border-color: rgb(124, 124, 124);
     margin-left: 165px;
     margin-right: 0px;
     background: transparent;
-    font-size: medium;
+    font-size: 15px;
 }
 
 #INPUTTEXT {
@@ -78,11 +62,8 @@ pre {
     width: 80%;
     font-size: 35px;
     box-sizing: border-box;
-    margin-top: 0px;
-    border-width: 0 0 0 1px;
+    margin-top: 35px;
     padding-left: 20px;
-    border-style: solid;
-    border-color: rgb(124, 124, 124);
     margin-left: 165px;
     margin-right: 20%;
     background: transparent;
@@ -90,56 +71,13 @@ pre {
 }
 
 .sides {
-    width: 80%;
+    width: 85%;
     box-sizing: border-box;
     margin-top: 50px;
-    margin-left: 100px;
+    margin-left: 40px;
     margin-right: 50px;
     border: none;
     background: transparent;
-}
-
-.labelfortitle {
-    font-family: 'Lora', serif;
-    width: 20px;
-    position: absolute;
-    margin-top: 0;
-    margin-left: 75px;
-    margin-right: 80%;
-    color: rgb(88, 88, 88);
-}
-
-.labelforauthor {
-    font-family: 'Lora', serif;
-    width: 30px;
-    position: absolute;
-    margin-top: 0;
-    margin-left: 90px;
-    margin-right: 85%;
-    color: rgb(88, 88, 88);
-    font-size: larger;
-}
-
-.labelfordate {
-    font-family: 'Lora', serif;
-    width: 10%;
-    position: absolute;
-    margin-top: -2px;
-    margin-left: 58px;
-    margin-right: 0px;
-    color: rgb(88, 88, 88);
-    font-size: larger;
-}
-
-.labelforcontent {
-    font-family: 'Lora', serif;
-    width: 5%;
-    position: absolute;
-    margin-top: 13px;
-    margin-left: 6%;
-    margin-right: 0px;
-    color: rgb(88, 88, 88);
-    font-size: larger;
 }
 
 .medium-editor-table {
@@ -151,14 +89,6 @@ pre {
 blockquote {
     border-left: 3px solid black;
     font-size: 22px;
-}
-
-.ql-syntax {
-    width: 1000px;
-}
-
-td {
-    padding: 7px;
 }
 
 ::selection {
@@ -190,29 +120,13 @@ td {
     #Datetime {
         font-family: 'Lora', serif;
         width: 100%;
-        font-size: 15px;
+        font-size: 13px;
         box-sizing: border-box;
-        margin-top: -3%;
-        margin-left: 5%;
+        margin-top: -4.5%;
+        margin-left: 3%;
         margin-right: 5%;
         border: none;
         background: transparent;
-    }
-
-    .labelfortitle {
-        font-size: 0;
-    }
-
-    .labelforauthor {
-        font-size: 0;
-    }
-
-    .labelfordate {
-        font-size: 0;
-    }
-
-    .labelforcontent {
-        font-size: 0;
     }
 
     h1 a {
@@ -250,7 +164,7 @@ td {
         width: 95%;
         box-sizing: border-box;
         margin-top: 2%;
-        margin-left: 5%;
+        margin-left: 3%;
         margin-right: 10%;
         border: none;
         background: transparent;
@@ -258,47 +172,24 @@ td {
         color: #000;
     }
     
-    #TITLETEXT::before {
-        font-family: 'Lora', serif;
-        position: absolute;
-        margin-left: -6%;
-        color: rgb(88, 88, 88);
-    }
-    
-    #TITLETEXT:focus::before {
-        font-family: 'Lora', serif;
-    }
-    
     #AUTHORNAME {
         font-family: 'Lora', serif;
         width: 95%;
         box-sizing: border-box;
-        margin-top: 0%;
-        margin-left: 5%;
+        margin-top: -2%;
+        margin-left: 3%;
         margin-right: 10%;
         border: none;
         background: transparent;
-        font-size: 17px;
-    }
-    
-    #AUTHORNAME::before {
-        font-family: 'Lora', serif;
-        position: absolute;
-        margin-left: -5%;
-        color: rgb(88, 88, 88);
-    }
-    
-    #AUTHORNAME:focus::before { 
-        font-family: 'Lora', serif;
-        color: rgb(34, 34, 34); 
+        font-size: 13px;
     }
     
     #INPUTTEXT {
         font-family: 'Lora', serif;
         width: 95%;
         box-sizing: border-box;
-        margin-top: 2%;
-        margin-left: 1%;
+        margin-top: 5%;
+        margin-left: 4%;
         margin-right: 10%;
         font-size: 20px;
         border: none;
@@ -328,7 +219,9 @@ td {
     }
 
     blockquote {
-        border-left: 2px solid black;
+        padding-left: -20px;
+        margin-left: -15px;
+        border-left: 3px solid black;
         font-size: 25px;
     }
 
@@ -383,7 +276,6 @@ td {
         box-sizing: border-box;
         margin-top: 50px;
         padding-left: 20px;
-        border-left: 1px solid rgb(124, 124, 124);
         margin-left: 165px;
         margin-right: 0px;
         background: transparent;
@@ -393,26 +285,24 @@ td {
         font-family: 'Lora', serif;
         width: 80%;
         box-sizing: border-box;
-        margin-top: -4px;
+        margin-top: -12px;
         padding-left: 20px;
-        border-left: 1px solid rgb(124, 124, 124);
         margin-left: 165px;
         margin-right: 0px;
         background: transparent;
-        font-size: medium;
+        font-size: 15px;
     }
 
     #AUTHORNAME {
         font-family: 'Lora', serif;
         width: 80%;
         box-sizing: border-box;
-        margin-top: 12px;
+        margin-top: -5px;
         padding-left: 20px;
-        border-left: 1px solid rgb(124, 124, 124);
         margin-left: 165px;
         margin-right: 0px;
         background: transparent;
-        font-size: medium;
+        font-size: 15px;
     }
     
     #INPUTTEXT {
@@ -420,9 +310,8 @@ td {
         width: 80%;
         font-size: 35px;
         box-sizing: border-box;
-        margin-top: 0px;
+        margin-top: 35px;
         padding-left: 20px;
-        border-left: 1px solid rgb(124, 124, 124);
         margin-left: 165px;
         margin-right: 20%;
         background: transparent;
@@ -436,49 +325,6 @@ td {
         margin-left: 100px;
         margin-right: 50px;
         background: transparent;
-    }
-    
-    .labelfortitle {
-        font-family: 'Lora', serif;
-        width: 20px;
-        position: absolute;
-        margin-top: 0;
-        margin-left: 75px;
-        margin-right: 80%;
-        color: rgb(88, 88, 88);
-    }
-    
-    .labelforauthor {
-        font-family: 'Lora', serif;
-        width: 30px;
-        position: absolute;
-        margin-top: 0;
-        margin-left: 90px;
-        margin-right: 85%;
-        color: rgb(88, 88, 88);
-        font-size: larger;
-    }
-    
-    .labelfordate {
-        font-family: 'Lora', serif;
-        width: 10%;
-        position: absolute;
-        margin-top: -2px;
-        margin-left: 58px;
-        margin-right: 0px;
-        color: rgb(88, 88, 88);
-        font-size: larger;
-    }
-    
-    .labelforcontent {
-        font-family: 'Lora', serif;
-        width: 5%;
-        position: absolute;
-        margin-top: 13px;
-        margin-left: 4%;
-        margin-right: 0px;
-        color: rgb(88, 88, 88);
-        font-size: larger;
     }
     
     blockquote {
@@ -537,7 +383,6 @@ td {
         box-sizing: border-box;
         margin-top: 50px;
         padding-left: 20px;
-        border-left: 1px solid rgb(124, 124, 124);
         margin-left: 165px;
         margin-right: 0px;
         background: transparent;
@@ -549,7 +394,6 @@ td {
         box-sizing: border-box;
         margin-top: -4px;
         padding-left: 20px;
-        border-left: 1px solid rgb(124, 124, 124);
         margin-left: 165px;
         margin-right: 0px;
         background: transparent;
@@ -562,7 +406,6 @@ td {
         box-sizing: border-box;
         margin-top: 12px;
         padding-left: 20px;
-        border-left: 1px solid rgb(124, 124, 124);
         margin-left: 165px;
         margin-right: 0px;
         background: transparent;
@@ -574,9 +417,8 @@ td {
         width: 80%;
         font-size: 35px;
         box-sizing: border-box;
-        margin-top: 0px;
+        margin-top: 55px;
         padding-left: 20px;
-        border-left: 1px solid rgb(124, 124, 124);
         margin-left: 165px;
         margin-right: 20%;
         background: transparent;
@@ -586,53 +428,10 @@ td {
     .sides {
         width: 80%;
         box-sizing: border-box;
-        margin-top: 50px;
-        margin-left: 100px;
+        margin-top: 80px;
+        margin-left: 200px;
         margin-right: 50px;
         background: transparent;
-    }
-    
-    .labelfortitle {
-        font-family: 'Lora', serif;
-        width: 20px;
-        position: absolute;
-        margin-top: 0;
-        margin-left: 75px;
-        margin-right: 80%;
-        color: rgb(88, 88, 88);
-    }
-    
-    .labelforauthor {
-        font-family: 'Lora', serif;
-        width: 30px;
-        position: absolute;
-        margin-top: 0;
-        margin-left: 90px;
-        margin-right: 85%;
-        color: rgb(88, 88, 88);
-        font-size: larger;
-    }
-    
-    .labelfordate {
-        font-family: 'Lora', serif;
-        width: 10%;
-        position: absolute;
-        margin-top: -2px;
-        margin-left: 58px;
-        margin-right: 0px;
-        color: rgb(88, 88, 88);
-        font-size: larger;
-    }
-    
-    .labelforcontent {
-        font-family: 'Lora', serif;
-        width: 5%;
-        position: absolute;
-        margin-top: 13px;
-        margin-left: 3%;
-        margin-right: 0px;
-        color: rgb(88, 88, 88);
-        font-size: larger;
     }
     
     blockquote {

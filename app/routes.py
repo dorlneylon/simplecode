@@ -5,7 +5,6 @@ import uuid
 from sqlalchemy.exc import IntegrityError
 import markdown2
 import json
-from delta import html
 from html2text import html2text
 from .app_config import POSTS_LIMIT
 
@@ -111,14 +110,9 @@ def checkpost():
         return jsonify({ "message" : "Something went wrong. You've probably missed a row. Try again." })
     data = Page.query.filter_by(token=token).first()
     if data is not None:
-        try:
-            ct = json.loads(data.text)['ops']
-            output = html.render(ct)
-            output = html2text(output)
-            date = data.date
-        except:
-            output = data.text
-            date = data.date
+        content = data.text
+        output = html2text(content)
+        date = data.date
     else:
         return jsonify({ "message" : "This post doesn't exist. Create one on /createpost page." })
     token = data.token

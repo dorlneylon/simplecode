@@ -32,18 +32,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&display=swap" rel="stylesheet">
     {% block body %}
 <div class="sides" contenteditable="false" dir="auto">
-    <div class="form" contenteditable="false" dir="auto" id="T">
-        <h1 class="labelfortitle">Title</h1><h1 class="empty" id="TITLETEXT" spellcheck="false" contenteditable="false">{{ title }}<br></h1>
+    <div class="form" contenteditable="false" dir="auto" id="T"><h1 class="empty" id="TITLETEXT" spellcheck="false" contenteditable="false">{{ title }}<br></h1>
     </div>
     <div class="form" contenteditable="false" dir="auto">
-    <section>
-        <address class="labelforauthor">Author</address><address name="A" contenteditable="false" spellcheck="false" id="AUTHORNAME" class="empty">{{ author }}<br></address>
+    <section><address name="A" contenteditable="false" spellcheck="false" id="AUTHORNAME" class="empty">{{ author }}<br></address>
     </section>
     </div>
-    <div class="form" contenteditable="false" dir="auto">
-        <address class="labelfordate">Publish date</address><address name="d" contenteditable="false" spellcheck="false" id="Datetime" class="empty">{{ date }}<br></address>
+    <div class="form" contenteditable="false" dir="auto"><address name="d" contenteditable="false" spellcheck="false" id="Datetime" class="empty">{{ date }}<br></address>
     </div>
-        <p class="labelforcontent">Content</p>
     <div class="form" contenteditable="false" dir="auto">
         <p class="empty" name="C" contenteditable="false" spellcheck="false" id="INPUTTEXT">
             {{ content }}
