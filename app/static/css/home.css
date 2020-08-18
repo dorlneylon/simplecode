@@ -6,6 +6,18 @@ h1 a {
     font-family: 'Lora', serif;
 }
 
+.medium-editor-insert-action {
+    color: black;
+}
+
+img {
+    width: 80%;
+}
+
+.medium-editor-insert-buttons-show {
+    color: black;
+}
+
 a:visited {
     color: #000000;
     text-decoration: none;
@@ -434,13 +446,21 @@ blockquote {
         font-size: 16px;
     }
     
+    .medium-editor-insert-action {
+        color: black;
+    }
+
+    .medium-editor-insert-buttons-show {
+        color: black;
+    }
+    
     #INPUTTEXT {
         font-family: 'Lora', serif;
         width: 95%;
         box-sizing: border-box;
         margin-top: 2%;
         margin-left: 7%;
-        margin-right: 10%;
+        margin-right: 2%;
         font-size: 20px;
         border: none;
         background: transparent;

@@ -16,6 +16,7 @@ var contenteditor = new MediumEditor(contentfield, {
     extensions: {
         'pre' : new MediumButton({label:'<i class="fa fa-code"></i>', start:"<pre>", end:"</pre>"}),
         'autolist': new AutoList(),
+        'insert': new MediumEditorInsert(),
         table: new MediumEditorTable()
     },
     toolbar: {
@@ -84,14 +85,16 @@ setInterval(function () {
     });
 }, 2000);
 
+document.querySelectorAll(".btn-align-center-full")[1].remove();
+
 function func1() {
     $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
         var ipaddress = data["ip"];
         var title = titleeditor.getContent();
         var author = authoreditor.getContent();
         var delta = contenteditor.getContent();
-        if (author.length > 8) {
-            if (title.length > 8) {
+        if (author.length > 10) {
+            if (title.length > 10) {
                 if (delta != null) {
                     if (delta != '<p></p>') {
                                 $.post("/cpapi", { ip: ipaddress, token: link, cyrauthor: author, cyrheadline: title, content: delta });

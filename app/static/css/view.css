@@ -91,6 +91,10 @@ blockquote {
     font-size: 22px;
 }
 
+img {
+    width: 80%;
+}
+
 ::selection {
     background-color: #cacaca;
     color: rgb(0, 0, 0);
