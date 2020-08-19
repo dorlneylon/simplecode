@@ -16,7 +16,6 @@ var contenteditor = new MediumEditor(contentfield, {
     extensions: {
         'pre' : new MediumButton({label:'<i class="fa fa-code"></i>', start:"<pre>", end:"</pre>"}),
         'autolist': new AutoList(),
-        'insert': new MediumEditorInsert(),
         table: new MediumEditorTable()
     },
     toolbar: {
