@@ -1,0 +1,473 @@
+h1 a {
+    margin-left: 1%;
+    margin-right: 70%;
+    color: #000000;
+    font-family: 'Lora', serif;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #000000;
+}
+
+#TITLETEXT {
+    font-family: 'Lora', serif;
+    width: 80%;
+    box-sizing: border-box;
+    margin-top: 50px;
+    padding-left: 20px;
+    margin-left: 165px;
+    margin-right: 0px;
+    background: transparent;
+}
+
+#Datetime {
+    font-family: 'Lora', serif;
+    width: 80%;
+    box-sizing: border-box;
+    margin-top: -16px;
+    padding-left: 20px;
+    margin-left: 165px;
+    margin-right: 0px;
+    background: transparent;
+    font-size: 15px;
+}
+
+pre {
+    color: white;
+    background-color: rgb(27, 27, 27);
+}
+
+
+#AUTHORNAME {
+    font-family: 'Lora', serif;
+    width: 80%;
+    box-sizing: border-box;
+    margin-top: -6px;
+    padding-left: 20px;
+    margin-left: 165px;
+    margin-right: 0px;
+    background: transparent;
+    font-size: 15px;
+}
+
+#INPUTTEXT {
+    font-family: 'Lora', serif;
+    width: 80%;
+    font-size: 35px;
+    box-sizing: border-box;
+    margin-top: 35px;
+    padding-left: 20px;
+    margin-left: 165px;
+    margin-right: 20%;
+    background: transparent;
+    font-size: large;
+}
+
+.sides {
+    width: 85%;
+    box-sizing: border-box;
+    margin-top: 50px;
+    margin-left: 40px;
+    margin-right: 50px;
+    border: none;
+    background: transparent;
+}
+
+.medium-editor-table {
+    border: 1px dashed #e3e3e3;
+    width: 80%;
+    margin-left: 17.5%;
+}
+
+blockquote {
+    border-left: 3px solid black;
+    font-size: 22px;
+}
+
+img {
+    width: 80%;
+}
+
+::selection {
+    background-color: #cacaca;
+    color: rgb(0, 0, 0);
+}
+
+::-moz-selection {
+    background-color: #cacaca;
+    color: rgb(0, 0, 0);
+}
+
+::-o-selection {
+    background-color: #cacaca;
+    color: rgb(0, 0, 0);
+}
+
+::-ms-selection {
+    background-color: #cacaca;
+    color: rgb(0, 0, 0);
+}
+
+::-webkit-selection {
+    background-color: #cacaca;
+    color: rgb(0, 0, 0);
+}
+
+@media screen and (max-width: 992px) {
+    #Datetime {
+        font-family: 'Lora', serif;
+        width: 100%;
+        font-size: 13px;
+        box-sizing: border-box;
+        margin-top: -4.5%;
+        margin-left: 3%;
+        margin-right: 5%;
+        border: none;
+        background: transparent;
+    }
+
+    h1 a {
+        margin-left: 1%;
+        margin-right: 70%;
+        font-size: 20px;
+        margin-top: -20%;
+        color: #000000;
+        position: absolute;
+        font-family: 'Lora', serif;
+    }
+    
+    a:visited {
+        color: #000000;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        text-decoration: none;
+        color: #000000;
+    }
+    
+    .form {
+        font-family: 'Lora', serif;
+        border: none;
+        width: 100%;
+        height: 100%;
+        resize: none;
+        background: transparent;
+        overflow: relative;
+    }
+    
+    #TITLETEXT {
+        font-family: 'Lora', serif;
+        width: 95%;
+        box-sizing: border-box;
+        margin-top: 2%;
+        margin-left: 3%;
+        margin-right: 10%;
+        border: none;
+        background: transparent;
+        font-size: 20px;
+        color: #000;
+    }
+    
+    #AUTHORNAME {
+        font-family: 'Lora', serif;
+        width: 95%;
+        box-sizing: border-box;
+        margin-top: -2%;
+        margin-left: 3%;
+        margin-right: 10%;
+        border: none;
+        background: transparent;
+        font-size: 13px;
+    }
+    
+    #INPUTTEXT {
+        font-family: 'Lora', serif;
+        width: 95%;
+        box-sizing: border-box;
+        margin-top: 5%;
+        margin-left: 4%;
+        margin-right: 10%;
+        font-size: 20px;
+        border: none;
+        background: transparent;
+    }
+    
+    #INPUTTEXT:focus::before {
+        font-family: 'Lora', serif;
+        color: rgb(34, 34, 34); 
+    }
+    
+    #INPUTTEXT::before {
+        font-family: 'Lora', serif;
+        position: absolute;
+        margin-left: -5%;
+        color: rgb(88, 88, 88);
+    }
+
+    .sides {
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 80px;
+        margin-left: -20px;
+        margin-right: 0;
+        border: none;
+        background: transparent;
+    }
+
+    blockquote {
+        padding-left: -20px;
+        margin-left: -15px;
+        border-left: 3px solid black;
+        font-size: 25px;
+    }
+
+    ::selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-moz-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-o-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-ms-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-webkit-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    h1 a {
+        margin-left: 1%;
+        margin-right: 70%;
+        text-decoration: none;
+        color: #000000;
+        font-family: 'Lora', serif;
+    }
+    
+    a:visited {
+        color: #000000;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        text-decoration: none;
+        color: #000000;
+    }
+    
+    #TITLETEXT {
+        font-family: 'Lora', serif;
+        width: 80%;
+        box-sizing: border-box;
+        margin-top: 50px;
+        padding-left: 20px;
+        margin-left: 165px;
+        margin-right: 0px;
+        background: transparent;
+    }
+    
+    #Datetime {
+        font-family: 'Lora', serif;
+        width: 80%;
+        box-sizing: border-box;
+        margin-top: -12px;
+        padding-left: 20px;
+        margin-left: 165px;
+        margin-right: 0px;
+        background: transparent;
+        font-size: 15px;
+    }
+
+    #AUTHORNAME {
+        font-family: 'Lora', serif;
+        width: 80%;
+        box-sizing: border-box;
+        margin-top: -5px;
+        padding-left: 20px;
+        margin-left: 165px;
+        margin-right: 0px;
+        background: transparent;
+        font-size: 15px;
+    }
+    
+    #INPUTTEXT {
+        font-family: 'Lora', serif;
+        width: 80%;
+        font-size: 35px;
+        box-sizing: border-box;
+        margin-top: 35px;
+        padding-left: 20px;
+        margin-left: 165px;
+        margin-right: 20%;
+        background: transparent;
+        font-size: large;
+    }
+    
+    .sides {
+        width: 80%;
+        box-sizing: border-box;
+        margin-top: 50px;
+        margin-left: 100px;
+        margin-right: 50px;
+        background: transparent;
+    }
+    
+    blockquote {
+        border-left: 3px solid black;
+        font-size: 22px;
+    }
+
+    ::selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-moz-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-o-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-ms-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-webkit-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+}
+
+@media screen and (min-width: 2400px) {
+    h1 a {
+        margin-left: 1%;
+        text-decoration: none;
+        margin-right: 70%;
+        color: #000000;
+        font-family: 'Lora', serif;
+    }
+    
+    a:visited {
+        color: #000000;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        text-decoration: none;
+        color: #000000;
+    }
+    
+    #TITLETEXT {
+        font-family: 'Lora', serif;
+        width: 80%;
+        box-sizing: border-box;
+        margin-top: 50px;
+        padding-left: 20px;
+        margin-left: 165px;
+        margin-right: 0px;
+        background: transparent;
+    }
+    
+    #Datetime {
+        font-family: 'Lora', serif;
+        width: 80%;
+        box-sizing: border-box;
+        margin-top: -4px;
+        padding-left: 20px;
+        margin-left: 165px;
+        margin-right: 0px;
+        background: transparent;
+        font-size: medium;
+    }
+
+    #AUTHORNAME {
+        font-family: 'Lora', serif;
+        width: 80%;
+        box-sizing: border-box;
+        margin-top: 12px;
+        padding-left: 20px;
+        margin-left: 165px;
+        margin-right: 0px;
+        background: transparent;
+        font-size: medium;
+    }
+    
+    #INPUTTEXT {
+        font-family: 'Lora', serif;
+        width: 80%;
+        font-size: 35px;
+        box-sizing: border-box;
+        margin-top: 55px;
+        padding-left: 20px;
+        margin-left: 165px;
+        margin-right: 20%;
+        background: transparent;
+        font-size: large;
+    }
+    
+    .sides {
+        width: 80%;
+        box-sizing: border-box;
+        margin-top: 80px;
+        margin-left: 200px;
+        margin-right: 50px;
+        background: transparent;
+    }
+    
+    blockquote {
+        border-left: 3px solid black;
+        font-size: 22px;
+    }
+
+    ::selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-moz-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-o-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-ms-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+    
+    ::-webkit-selection {
+        background-color: #cacaca;
+        color: rgb(0, 0, 0);
+    }
+}
+
+
+/* TODO: upgrade all that stuff later */

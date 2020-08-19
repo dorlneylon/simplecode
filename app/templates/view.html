@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/vs2015.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/medium-editor.css') }}" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/medium-editor-tables.css') }}">
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <script src="{{ url_for('static', filename='js/mobile-medium.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/medium-autolist.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/medium-button.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mediumeditor-codeblocks.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/medium-tables.js') }}"></script>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}">
+    <title>SimpleCode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@1,500&display=swap" rel="stylesheet", type="text/css">
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <meta charset="UTF-8">
+    {% block head %}
+    <h1><a href="/">SimpleCode</a></h1>
+    {% endblock %}
+</head>
+<body>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&display=swap" rel="stylesheet">
+    {% block body %}
+<div class="sides" contenteditable="false" dir="auto">
+    <div class="form" contenteditable="false" dir="auto" id="T"><h1 class="empty" id="TITLETEXT" spellcheck="false" contenteditable="false">{{ title }}<br></h1>
+    </div>
+    <div class="form" contenteditable="false" dir="auto">
+    <section><address name="A" contenteditable="false" spellcheck="false" id="AUTHORNAME" class="empty">{{ author }}<br></address>
+    </section>
+    </div>
+    <div class="form" contenteditable="false" dir="auto"><address name="d" contenteditable="false" spellcheck="false" id="Datetime" class="empty">{{ date }}<br></address>
+    </div>
+    <div class="form" contenteditable="false" dir="auto">
+        <p class="empty" name="C" contenteditable="false" spellcheck="false" id="INPUTTEXT">
+            {{ content }}
+        </p>
+        <br>
+    </div>
+</div>
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/view.js') }}"></script>
+</body>
+</html>
