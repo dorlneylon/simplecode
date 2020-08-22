@@ -1,6 +1,7 @@
 hljs.configure({
     languages: ["javascript", "ruby", "python", "cpp", "c", "cs", "php", "html", "css", "postgres"],
-    tabReplace: "    "
+    tabReplace: "    ",
+    useBR: true
 });
 
 document.getElementById("AUTHORNAME").innerHTML = document.getElementById("AUTHORNAME").innerHTML.split("<br>").join("");

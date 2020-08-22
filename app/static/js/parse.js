@@ -14,18 +14,62 @@ let contentfield = document.getElementById("INPUTTEXT");
 var contenteditor = new MediumEditor(contentfield, {
     buttonLabels: 'fontawesome',
     extensions: {
-        'pre' : new MediumButton({label:'<i class="fa fa-code"></i>', start:"<pre>", end:"</pre>"}),
-        'autolist': new AutoList(),
-        table: new MediumEditorTable()
+        'pre' : new MediumButton({label:'<i class="fa fa-code", style="-webkit-text-stroke: 1px white; color: white"></i>', start:"<pre>", end:"</pre>",
+        action: function (html) {
+            if ($(window).width() < 993) {
+                $(".warnpre").css({"margin-top" : "-10%"});
+                setTimeout(() => {$(".warn-pre").css({"margin-top" : "-60%"})}, 2000);
+             } else {
+                $(".warn-pre").css({"margin-top" : "-3%"});
+                setTimeout(() => {$(".warn-pre").css({"margin-top" : "-20%"})}, 2000);
+             };
+             return html;
+        }
+        }),
+        // 'bold' : new MediumButton({label:"<div class='boldmb'></div>", start:"<b>", end:"</b>"}),
+        // 'italic' : new MediumButton({label:"<div class='italicmb'></div>", start:"<i>", end:"</i>"}),
+        // 'quote' : new MediumButton({label:"<div class='quotemb'></div>", action: function (html, parent) {if (html.includes("<blockquote>") === false && parent === false) {return "<blockquote><i>" + html + "</i></blockquote>"} else {return html.split("<blockquote><i>").join("").split("</blockquote></i>").join("")}}}),
+        // 'h2' : new MediumButton({label:'<div class="h2mb"></div>', action: function (html, parent) {if (html.includes("<h2>")) {return html.split("<h2><b>").join("").split("</h2></b>").join("")} else {return "<h2><b>" + html + "</h2></b>"}}}),
+        // 'h3' : new MediumButton({label:'<div class="h3mb"></div>', action: function (html, parent) {if (html.includes("<h3>")) {return html.split("<h3><b>").join("").split("</h3></b>").join("")} else {return "<h3><b>" + html + "</h3></b>"}}}),
+        table: new MediumEditorTable(),
     },
     toolbar: {
       buttons: [
-        'bold',
-        'italic',
-        'underline',
-        'quote',
-        'h2',
-        'h3',
+        {
+            name: 'bold',
+            tagNames: ['b'],
+            useQueryState: true,
+            contentDefault: '<i class="boldmb"></i>',
+            contentFA: '<div class="boldmb"></div>'
+        },
+        {
+            name: 'italic',
+            tagNames: ['i'],
+            useQueryState: true,
+            contentDefault: '<i class="italicmb"></i>',
+            contentFA: '<div class="italicmb"></div>'
+        },
+        {
+            name: 'quote',
+            tagNames: ['blockquote'],
+            useQueryState: true,
+            contentDefault: '<i class="quotemb"></i>',
+            contentFA: '<div class="quotemb"></div>'
+        },
+        {
+            name: 'h2',
+            tagNames: ['h2'],
+            useQueryState: true,
+            contentDefault: '<i class="h2mb"></i>',
+            contentFA: '<div class="h2mb"></div>'
+        },
+        {
+            name: 'h3',
+            tagNames: ['h3'],
+            useQueryState: true,
+            contentDefault: '<i class="h3mb"></i>',
+            contentFA: '<div class="h3mb"></div>'
+        },
         'pre',
         'table'
       ]
@@ -36,6 +80,7 @@ var contenteditor = new MediumEditor(contentfield, {
     spellcheck: false
   });
 
+
 var authoreditor = new MediumEditor(authorfield, {
     toolbar: false,
     placeholder: {
@@ -43,6 +88,7 @@ var authoreditor = new MediumEditor(authorfield, {
     },
     spellcheck: false
 });
+
 var titleeditor = new MediumEditor(titlefield, {
     toolbar: false,
     placeholder: {
@@ -51,16 +97,9 @@ var titleeditor = new MediumEditor(titlefield, {
     spellcheck: false
 });
 
-document.querySelectorAll(".medium-editor-action")[6].addEventListener("click", function () {
-    if (document.querySelectorAll(".medium-editor-action")[6].classList.contains("medium-editor-button-active") != true) {
-        if ($(window).width() < 993) {
-            $(".warn-pre").css({"margin-top" : "-10%"});
-            setTimeout(() => {$(".warn-pre").css({"margin-top" : "-60%"})}, 2000);
-         } else {
-            $(".warn-pre").css({"margin-top":"-3%"});
-            setTimeout(() => {$(".warn-pre").css({"margin-top":"-25%"})}, 2000);
-         }
-    };
+contenteditor.subscribe('editableKeyup', function () {
+    try {$("pre").html().split("<p>").join("").split("</p>").join("\n");} catch (e) {};
+    // $("#INPUTTEXT").html().split("<blockquote>").join("<blockquote><i>").split("</blockquote>").join("</blockquote></i>")
 });
 
 $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
@@ -84,7 +123,6 @@ setInterval(function () {
     });
 }, 2000);
 
-document.querySelectorAll(".btn-align-center-full")[1].remove();
 
 function func1() {
     $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {

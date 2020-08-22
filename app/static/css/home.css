@@ -6,8 +6,9 @@ h1 a {
     font-family: 'Lora', serif;
 }
 
-.medium-editor-insert-action {
-    color: black;
+.medium-insert-buttons-show > span {
+    text-align: center;
+    padding-top: 3px;
 }
 
 img {
@@ -99,6 +100,72 @@ a:hover {
 pre {
     color: white;
     background-color: rgb(27, 27, 27);
+}
+
+.boldmb::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-left: 0px;
+    margin-right: 361px;
+    content: "";
+    display: inline-block;
+    background: url(/icons) 7px 12px no-repeat
+}
+
+.italicmb::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-left: 60px;
+    margin-right: 300px;
+    content: "";
+    display: inline-block;
+    background: url(/icons) 10px -52px no-repeat
+}
+
+.quotemb::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-left: 120px;
+    margin-right: 240px;
+    content: "";
+    display: inline-block;
+    background: url(/icons) 9px -308px no-repeat
+/*     background: url(/icons) 10px -52px no-repeat */
+}
+
+.h2mb::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-left: 180px;
+    margin-right: 180px;
+    content: "";
+    display: inline-block;
+    background: url(/icons) 8px -180px no-repeat
+}
+
+.h3mb::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin-left: 240px;
+    margin-right: 120px;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    background: url(/icons) 8px -245px no-repeat;
 }
 
 .button-parent a {
