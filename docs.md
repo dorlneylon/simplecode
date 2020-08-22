@@ -7,6 +7,7 @@
 | /\<token\> | get_lel | ['GET', 'POST'] | True |
 | /createpost | createOne | ['POST'] | True |
 | /checkpost | checkpost | ['POST'] | True |
+| /icons | icons | ['GET', 'POST'] | True |
 | /cpapi | cpapi | ['POST'] | True |
 | /index | index | ['GET', 'POST'] | True |
 | /unpublished | unpublished | ['POST'] | True |
@@ -51,6 +52,13 @@ Description: You can check if post exists and if it exists then you'll be able t
 Possible errors: IntegrityError, KeyError.
 
 Output example: { "link" : "/token", "author" : testauthor, "title" : testtitle, "content" : testcontent, "publish date" : testdate }.
+
+
+## icons's docs:
+
+Description: Shows icons for CSS.
+
+Output: icons png.
 
 
 ## cpapi's docs:
