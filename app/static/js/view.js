@@ -12,7 +12,7 @@ document.querySelectorAll("pre").forEach((element) => {
     element.innerHTML = element.innerHTML.split("<p>").join("").split("</p>").join("\n<br>")
 });
 
-$('.medium-insert-embeds-overlay').remove()
+$('.medium-insert-embeds-overlay').remove();
 
 // var contenteditor = new MediumEditor("#INPUTTEXT", {
 //     toolbar: false,
