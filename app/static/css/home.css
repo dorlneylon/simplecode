@@ -1,13 +1,27 @@
 h1 a {
     margin-left: 1%;
     margin-right: 70%;
+    border-bottom: 0;
     text-decoration: none;
     color: #000000;
     font-family: 'Lora', serif;
 }
 
-.medium-editor-insert-action {
-    color: black;
+.medium-insert-images .medium-insert-images-progress {
+    background: none;
+}
+
+a {
+    border-bottom: 1px solid black;
+}
+
+#medium-editor-anchor-preview-1 {
+    visibility: hidden;
+}
+
+.medium-insert-buttons-show > span {
+    text-align: center;
+    padding-top: 3px;
 }
 
 img {
@@ -47,8 +61,12 @@ a:hover {
     margin-right: 0px;
     border: none;
     background: transparent;
-    font-size: large;
+    font-size: xx-large;
     color: #000;
+}
+
+#TITLETEXT::after {
+    margin: 0;
 }
 
 #AUTHORNAME {
@@ -61,7 +79,11 @@ a:hover {
     border: none;
     background: transparent;
     font-size: medium;
-    }
+   }
+
+#AUTHORNAME::after {
+    margin: 0;
+}
 
 #INPUTTEXT {
     font-family: 'Lora', serif;
@@ -74,6 +96,10 @@ a:hover {
     border: none;
     background: transparent;
     font-size: large;
+}
+
+#INPUTTEXT::after {
+    margin: 0;
 }
 
 .sides {
@@ -96,9 +122,208 @@ a:hover {
     padding: 4em 1em;
 }
 
+.fa-times::before {
+    position: absolute;
+    margin-left: -5px;
+    margin-top: -16px;
+}
+
+.medium-editor-action {
+    border-radius: 15px;
+}
+
+.medium-editor-action:hover {
+    border-radius: 15px;
+}
+
 pre {
     color: white;
     background-color: rgb(27, 27, 27);
+    padding: 9.5px 9.5px 2px 9.5px;
+}
+
+
+.boldmb::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 45px;
+    margin-left: 0;
+    content: "";
+    display: inline-block;
+    transition: 0.5s;
+    background: url(/icons) 7px 1px no-repeat;
+}
+
+.boldmb:hover::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 55px;
+    margin-left: 0;
+    content: "";
+    display: inline-block;
+    background: url(/icons) 7px 1px no-repeat;
+    transition: 0.5s;
+    filter: brightness(0.7);
+}
+
+.italicmb::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 35px;
+    padding-left: 5px;
+    margin-left: 38px;
+    content: "";
+    display: inline-block;
+    transition: 0.5s;
+    background: url(/icons) 1px -63px no-repeat;
+}
+
+.italicmb:hover::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 35px;
+    padding-left: 0px;
+    margin-left: 38px;
+    content: "";
+    display: inline-block;
+    background: url(/icons) 1px -63px no-repeat;
+    transition: 0.5s;
+    filter: brightness(0.7);
+}
+
+.medium-editor-button-active > .italicmb::before {
+    margin-left: -2px;
+    transition: 0s;
+}
+
+.medium-editor-button-active > .italicmb:hover::before {
+    margin-left: -2px;
+    transition: 0s;
+}
+
+.medium-insert-images .medium-insert-images-progress {
+    background: none;
+}
+
+.iframely-responsive {
+    top:0;
+    left:0;
+    width:100%;
+    height:0;
+    position:relative;
+    padding-bottom:56.25%;
+    box-sizing:border-box;
+   }
+   .iframely-responsive>* {
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    position:absolute;
+    border:0;
+    box-sizing:border-box;
+   }
+   
+
+.quotemb::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 35px;
+    margin-left: 75px;
+    content: "";
+    display: inline-block;
+    transition: 0.5s;
+    background: url(/icons) 0px -319px no-repeat;
+/*     background: url(/icons) 10px -52px no-repeat */
+}
+
+.quotemb:hover::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 35px;
+    margin-left: 75px;
+    content: "";
+    display: inline-block;
+    background: url(/icons) 0px -319px no-repeat;
+    transition: 0.5s;
+    filter: brightness(0.7);
+/*     background: url(/icons) 10px -52px no-repeat */
+}
+
+.h2mb::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    margin-left: 112px;
+    content: "";
+    display: inline-block;
+    transition: 0.5s;
+    background: url(/icons) -2px -191px no-repeat;
+}
+
+.h2mb:hover::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    margin-left: 112px;
+    content: "";
+    display: inline-block;
+    transition: 0.5s;
+    background: url(/icons) -2px -191px no-repeat;
+    filter: brightness(0.7);
+}
+
+.h3mb::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 40px;
+    margin-left: 146px;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    transition: 0.5s;
+    background: url(/icons) 0px -255px no-repeat;
+}
+
+.h3mb:hover::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 45px;
+    margin-left: 146px;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    transition: 0.5s;
+    background: url(/icons) 0px -255px no-repeat;
+    filter: brightness(0.7);
 }
 
 .button-parent a {
@@ -109,13 +334,44 @@ pre {
     display: inline-block;
 }
 
+.medium-editor-button-active {
+    transition: 0.5s;
+    filter: brightness(0.7);
+}
+
 .button-item {
 padding-bottom: 2em;
 }
 
+.medium-editor-action > .fa-code::before {
+    transition: 0.5s;
+    margin-left: -15px;
+}
 
-.ql-active {
-    color: #fff;
+.medium-editor-action > .fa-code:hover::before {
+    transition: 0.5s;
+    margin-left: -15px;
+    filter: brightness(0.7);
+}
+
+.medium-editor-action > .fa-table::before {
+    transition: 0.5s;
+    padding-left: -15px;
+    margin-right: 0px;
+}
+
+.medium-editor-action > .fa-table {
+    position: absolute;
+    transition: 0.5s;
+    margin-top: -5px;
+    margin-left: -10px;
+}
+
+.medium-editor-action > .fa-code {
+    position: absolute;
+    transition: 0.5s;
+    margin-top: -5px;
+    margin-left: -5px;
 }
 
 .btn-1 {

@@ -1,6 +1,7 @@
 hljs.configure({
     languages: ["javascript", "ruby", "python", "cpp", "c", "cs", "php", "html", "css", "postgres"],
-    tabReplace: "    "
+    tabReplace: "    ",
+    useBR: true
 });
 
 const rand=()=>Math.random(0).toString(36).substr(2);
@@ -13,18 +14,59 @@ let contentfield = document.getElementById("INPUTTEXT");
 
 var contenteditor = new MediumEditor(contentfield, {
     buttonLabels: 'fontawesome',
+    autoLink: true,
     extensions: {
-        'pre' : new MediumButton({label:'<i class="fa fa-code"></i>', start:"<pre>", end:"</pre>"}),
-        'autolist': new AutoList(),
+        'pre' : new MediumButton({label:'<i class="fa fa-code", style="-webkit-text-stroke: 1px white; color: white"></i>', start:"<pre>", end:"</pre>",
+        action: function (html) {
+            if ($(window).width() < 993) {
+                $(".warnpre").css({"margin-top" : "-10%"});
+                setTimeout(() => {$(".warn-pre").css({"margin-top" : "-60%"})}, 2000);
+             } else {
+                $(".warn-pre").css({"margin-top" : "-3%"});
+                setTimeout(() => {$(".warn-pre").css({"margin-top" : "-20%"})}, 2000);
+             };
+             return html;
+        }
+        }),
         table: new MediumEditorTable(),
     },
     toolbar: {
       buttons: [
-        'bold',
-        'italic',
-        'quote',
-        'h2',
-        'h3',
+        {
+            name: 'bold',
+            tagNames: ['b'],
+            useQueryState: true,
+            contentDefault: '<b>&bull;</b>',
+            contentFA: "<div class='boldmb'></i>"
+        },
+        {
+            name: 'italic',
+            tagNames: ['i'],
+            useQueryState: true,
+            contentDefault: '<b>&bull;</b>',
+            contentFA: "<div class='italicmb'></i>"
+        },
+        {
+            name: 'quote',
+            tagNames: ['quote'],
+            useQueryState: true,
+            contentDefault: '<b>&ldquo;</b>',
+            contentFA: "<div class='quotemb'></i>"
+        },
+        {
+            name: 'h2',
+            tagNames: ['h2'],
+            useQueryState: true,
+            contentDefault: '<b>&bull;</b>',
+            contentFA: "<div class='h2mb'></i>"
+        },
+        {
+            name: 'h3',
+            tagNames: ['h3'],
+            useQueryState: true,
+            contentDefault: '<b>&bull;</b>',
+            contentFA: "<div class='h3mb'></i>"
+        },
         'pre',
         'table'
       ]
@@ -33,11 +75,11 @@ var contenteditor = new MediumEditor(contentfield, {
         text: 'Content'
     },
     spellcheck: false
-  });
+});
 
 $(function () {
     $('#INPUTTEXT').mediumInsert({
-        editor: contenteditor
+        editor: contenteditor,
     });
 });
 
@@ -48,6 +90,7 @@ var authoreditor = new MediumEditor(authorfield, {
     },
     spellcheck: false
 });
+
 var titleeditor = new MediumEditor(titlefield, {
     toolbar: false,
     placeholder: {
@@ -56,50 +99,89 @@ var titleeditor = new MediumEditor(titlefield, {
     spellcheck: false
 });
 
-document.querySelectorAll(".medium-editor-action")[6].addEventListener("click", function () {
-    if (document.querySelectorAll(".medium-editor-action")[6].classList.contains("medium-editor-button-active") != true) {
-        if ($(window).width() < 993) {
-            $(".warn-pre").css({"margin-top" : "-10%"});
-            setTimeout(() => {$(".warn-pre").css({"margin-top" : "-60%"})}, 2000);
-         } else {
-            $(".warn-pre").css({"margin-top":"-3%"});
-            setTimeout(() => {$(".warn-pre").css({"margin-top":"-25%"})}, 2000);
-         }
-    };
+contenteditor.subscribe("edditableKeyup", function () {
+    let allContents1 = contenteditor.serialize();
+    let allContents2 = authoreditor.serialize();
+    let allContents3 = titleeditor.serialize();
+    let ccontent = allContents1["INPUTTEXT"].value;
+    let acontent = allContents2["AUTHORNAME"].value;
+    let tcontent = allContents3["TITLETEXT"].value;
+    if (!ccontent) {
+        contenteditor.setContent("<p><br></p>")
+    } else if (!acontent) {
+        authoreditor.setContent("<p><br></p>")
+    } else if (!tcontent) {
+        titleeditor.setContent("<p><br></p>")
+    }
+});
+
+authoreditor.subscribe("edditableKeyup", function () {
+    let allContents1 = contenteditor.serialize();
+    let allContents2 = authoreditor.serialize();
+    let allContents3 = titleeditor.serialize();
+    let ccontent = allContents1["INPUTTEXT"].value;
+    let acontent = allContents2["AUTHORNAME"].value;
+    let tcontent = allContents3["TITLETEXT"].value;
+    if (!ccontent) {
+        contenteditor.setContent("<p><br></p>")
+    } else if (!acontent) {
+        authoreditor.setContent("<p><br></p>")
+    } else if (!tcontent) {
+        titleeditor.setContent("<p><br></p>")
+    }
+});
+
+titleeditor.subscribe("edditableKeyup", function () {
+    let allContents1 = contenteditor.serialize();
+    let allContents2 = authoreditor.serialize();
+    let allContents3 = titleeditor.serialize();
+    let ccontent = allContents1["INPUTTEXT"].value;
+    let acontent = allContents2["AUTHORNAME"].value;
+    let tcontent = allContents3["TITLETEXT"].value;
+    if (!ccontent) {
+        contenteditor.setContent("<p><br></p>")
+    } else if (!acontent) {
+        authoreditor.setContent("<p><br></p>")
+    } else if (!tcontent) {
+        titleeditor.setContent("<p><br></p>")
+    }
 });
 
 $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
         var ipaddress = data["ip"];
         $.post("/checkunpub", { ip: ipaddress }, function (output) {
             if (output != null) {
-                authoreditor.setContent(output["author"]);
-                titleeditor.setContent(output["title"]);
-                contenteditor.setContent(output["text"]);
+                document.getElementById("TITLETEXT").innerHTML = output["title"];
+                document.getElementById("AUTHORNAME").innerHTML = output["author"];
+                document.getElementById("INPUTTEXT").innerHTML = output["text"];
             };
         }
-        )});
+)});
 
 setInterval(function () {
     $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
         var ipaddress = data["ip"];
-        var title = titleeditor.getContent();
-        var author = authoreditor.getContent();
-        var text = contenteditor.getContent();
+        var title = document.getElementById("TITLETEXT").innerHTML;
+        var author = document.getElementById("AUTHORNAME").innerHTML;
+        var text = document.getElementById("INPUTTEXT").innerHTML;
+        // var delta = contenteditor.serialize();
+        // console.log(delta["INPUTTEXT"].value);
         $.post("/unpublished", {ip: ipaddress, author: author, title: title, text: text })
     });
-}, 2000);
+}, 5000);
 
 
 function func1() {
     $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
         var ipaddress = data["ip"];
-        var title = titleeditor.getContent();
-        var author = authoreditor.getContent();
-        var delta = contenteditor.getContent();
+        var title = document.getElementById("TITLETEXT").innerHTML;
+        var author = document.getElementById("AUTHORNAME").innerHTML;
+        var delta = document.getElementById("INPUTTEXT").innerHTML;
+        // var delta = contenteditor.serialize();
         if (author.length > 10) {
             if (title.length > 10) {
                 if (delta != null) {
-                    if (delta != '<p></p>') {
+                    if (delta != '<p><br></p>') {
                                 $.post("/cpapi", { ip: ipaddress, token: link, cyrauthor: author, cyrheadline: title, content: delta });
                                 setTimeout(() => {
                                     window.location.href = "/" + link;

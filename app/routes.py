@@ -1,4 +1,4 @@
-from flask import render_template, request, jsonify, redirect, Markup
+from flask import render_template, request, jsonify, redirect, Markup, send_file
 from .models import Page, Unpublished, db
 from .middleware import posts_limiter
 import uuid
@@ -40,6 +40,13 @@ def home():
     elif request.method == "POST":
         return jsonify({ "message": "To create a post simply go on /createpost with POST method with 'author', 'title' and the 'content' fields. If you want to check any post then just go on /checkpost with the link to the post you want to get info about." })
 
+
+def icons():
+    """
+    Description: Shows icons for CSS.
+    Output: icons png.
+    """
+    return send_file("static/images/icons.png")
 
 @posts_limiter
 def createOne():
