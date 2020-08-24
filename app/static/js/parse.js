@@ -99,7 +99,7 @@ var titleeditor = new MediumEditor(titlefield, {
     spellcheck: false
 });
 
-contenteditor.subscribe("edditableKeyup", function () {
+contenteditor.subscribe("editableKeyup", function () {
     let allContents1 = contenteditor.serialize();
     let allContents2 = authoreditor.serialize();
     let allContents3 = titleeditor.serialize();
@@ -115,7 +115,7 @@ contenteditor.subscribe("edditableKeyup", function () {
     }
 });
 
-authoreditor.subscribe("edditableKeyup", function () {
+authoreditor.subscribe("editableKeyup", function () {
     let allContents1 = contenteditor.serialize();
     let allContents2 = authoreditor.serialize();
     let allContents3 = titleeditor.serialize();
@@ -131,7 +131,7 @@ authoreditor.subscribe("edditableKeyup", function () {
     }
 });
 
-titleeditor.subscribe("edditableKeyup", function () {
+titleeditor.subscribe("editableKeyup", function () {
     let allContents1 = contenteditor.serialize();
     let allContents2 = authoreditor.serialize();
     let allContents3 = titleeditor.serialize();
