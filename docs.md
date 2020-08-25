@@ -8,6 +8,7 @@
 | /createpost | createOne | ['POST'] | True |
 | /checkpost | checkpost | ['POST'] | True |
 | /icons | icons | ['GET', 'POST'] | True |
+| /api | api | ['GET'] | True |
 | /cpapi | cpapi | ['POST'] | True |
 | /index | index | ['GET', 'POST'] | True |
 | /unpublished | unpublished | ['POST'] | True |
@@ -61,6 +62,7 @@ Description: Shows icons for CSS.
 Output: icons png.
 
 
+## api's docs:Nothing special
 ## cpapi's docs:
 
 Requires: author's name, title, token, content.
