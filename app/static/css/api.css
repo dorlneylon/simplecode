@@ -62,7 +62,7 @@ a:hover {
     width: 80%;
     box-sizing: border-box;
     margin-top: 50px;
-    padding-left: 18px;
+    padding-left: 36px;
     margin-left: 165px;
     margin-right: 0px;
     background: transparent;
@@ -73,7 +73,7 @@ a:hover {
     width: 80%;
     box-sizing: border-box;
     margin-top: -16px;
-    padding-left: 59px;
+    padding-left: 69px;
     margin-left: 165px;
     margin-right: 0px;
     background: transparent;
@@ -91,20 +91,20 @@ pre {
     width: 80%;
     box-sizing: border-box;
     margin-top: -6px;
-    padding-left: 59px;
+    padding-left: 37px;
     margin-left: 165px;
     margin-right: 0px;
     background: transparent;
-    /* font-size: 15px; */
+    font-size: 18px;
 }
 
 #INPUTTEXT {
     font-family: 'Lora', serif;
-    width: 70%;
+    width: 80%;
     font-size: 35px;
     box-sizing: border-box;
     margin-top: 35px;
-    padding-left: 56px;
+    padding-left: 39px;
     margin-left: 165px;
     margin-right: 20%;
     background: transparent;

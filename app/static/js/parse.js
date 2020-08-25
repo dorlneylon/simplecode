@@ -1,6 +1,7 @@
 hljs.configure({
     languages: ["javascript", "ruby", "python", "cpp", "c", "cs", "php", "html", "css", "postgres"],
-    tabReplace: "    "
+    tabReplace: "    ",
+    useBR: true
 });
 
 const rand=()=>Math.random(0).toString(36).substr(2);
@@ -13,6 +14,7 @@ let contentfield = document.getElementById("INPUTTEXT");
 
 var contenteditor = new MediumEditor(contentfield, {
     buttonLabels: 'fontawesome',
+    autoLink: true,
     extensions: {
         'pre' : new MediumButton({label:'<i class="fa fa-code", style="-webkit-text-stroke: 1px white; color: white"></i>', start:"<pre>", end:"</pre>",
         action: function (html) {
@@ -26,11 +28,6 @@ var contenteditor = new MediumEditor(contentfield, {
              return html;
         }
         }),
-        // 'bold' : new MediumButton({label:"<div class='boldmb'></div>", start:"<b>", end:"</b>"}),
-        // 'italic' : new MediumButton({label:"<div class='italicmb'></div>", start:"<i>", end:"</i>"}),
-        // 'quote' : new MediumButton({label:"<div class='quotemb'></div>", action: function (html, parent) {if (html.includes("<blockquote>") === false && parent === false) {return "<blockquote><i>" + html + "</i></blockquote>"} else {return html.split("<blockquote><i>").join("").split("</blockquote></i>").join("")}}}),
-        // 'h2' : new MediumButton({label:'<div class="h2mb"></div>', action: function (html, parent) {if (html.includes("<h2>")) {return html.split("<h2><b>").join("").split("</h2></b>").join("")} else {return "<h2><b>" + html + "</h2></b>"}}}),
-        // 'h3' : new MediumButton({label:'<div class="h3mb"></div>', action: function (html, parent) {if (html.includes("<h3>")) {return html.split("<h3><b>").join("").split("</h3></b>").join("")} else {return "<h3><b>" + html + "</h3></b>"}}}),
         table: new MediumEditorTable(),
     },
     toolbar: {
@@ -39,36 +36,36 @@ var contenteditor = new MediumEditor(contentfield, {
             name: 'bold',
             tagNames: ['b'],
             useQueryState: true,
-            contentDefault: '<i class="boldmb"></i>',
-            contentFA: '<div class="boldmb"></div>'
+            contentDefault: '<b>&bull;</b>',
+            contentFA: "<div class='boldmb'></i>"
         },
         {
             name: 'italic',
             tagNames: ['i'],
             useQueryState: true,
-            contentDefault: '<i class="italicmb"></i>',
-            contentFA: '<div class="italicmb"></div>'
+            contentDefault: '<b>&bull;</b>',
+            contentFA: "<div class='italicmb'></i>"
         },
         {
             name: 'quote',
-            tagNames: ['blockquote'],
+            tagNames: ['quote'],
             useQueryState: true,
-            contentDefault: '<i class="quotemb"></i>',
-            contentFA: '<div class="quotemb"></div>'
+            contentDefault: '<b>&ldquo;</b>',
+            contentFA: "<div class='quotemb'></i>"
         },
         {
             name: 'h2',
             tagNames: ['h2'],
             useQueryState: true,
-            contentDefault: '<i class="h2mb"></i>',
-            contentFA: '<div class="h2mb"></div>'
+            contentDefault: '<b>&bull;</b>',
+            contentFA: "<div class='h2mb'></i>"
         },
         {
             name: 'h3',
             tagNames: ['h3'],
             useQueryState: true,
-            contentDefault: '<i class="h3mb"></i>',
-            contentFA: '<div class="h3mb"></div>'
+            contentDefault: '<b>&bull;</b>',
+            contentFA: "<div class='h3mb'></i>"
         },
         'pre',
         'table'
@@ -78,14 +75,20 @@ var contenteditor = new MediumEditor(contentfield, {
         text: 'Content'
     },
     spellcheck: false
-  });
+});
 
+$(function () {
+    $('#INPUTTEXT').mediumInsert({
+        editor: contenteditor,
+    });
+});
 
 var authoreditor = new MediumEditor(authorfield, {
     toolbar: false,
     placeholder: {
         text: 'Author'
     },
+    autoLink: true,
     spellcheck: false
 });
 
@@ -97,47 +100,93 @@ var titleeditor = new MediumEditor(titlefield, {
     spellcheck: false
 });
 
-contenteditor.subscribe('editableKeyup', function () {
-    try {$("pre").html().split("<p>").join("").split("</p>").join("\n");} catch (e) {};
-    // $("#INPUTTEXT").html().split("<blockquote>").join("<blockquote><i>").split("</blockquote>").join("</blockquote></i>")
+contenteditor.subscribe("editableKeyup", function () {
+    let allContents1 = contenteditor.serialize();
+    let allContents2 = authoreditor.serialize();
+    let allContents3 = titleeditor.serialize();
+    let ccontent = allContents1["INPUTTEXT"].value;
+    let acontent = allContents2["AUTHORNAME"].value;
+    let tcontent = allContents3["TITLETEXT"].value;
+    if (!ccontent) {
+        contenteditor.setContent("<p><br></p>")
+    } else if (!acontent) {
+        authoreditor.setContent("<p><br></p>")
+    } else if (!tcontent) {
+        titleeditor.setContent("<p><br></p>")
+    }
+});
+
+authoreditor.subscribe("editableKeyup", function () {
+    let allContents1 = contenteditor.serialize();
+    let allContents2 = authoreditor.serialize();
+    let allContents3 = titleeditor.serialize();
+    let ccontent = allContents1["INPUTTEXT"].value;
+    let acontent = allContents2["AUTHORNAME"].value;
+    let tcontent = allContents3["TITLETEXT"].value;
+    if (!ccontent) {
+        contenteditor.setContent("<p><br></p>")
+    } else if (!acontent) {
+        authoreditor.setContent("<p><br></p>")
+    } else if (!tcontent) {
+        titleeditor.setContent("<p><br></p>")
+    }
+});
+
+titleeditor.subscribe("editableKeyup", function () {
+    let allContents1 = contenteditor.serialize();
+    let allContents2 = authoreditor.serialize();
+    let allContents3 = titleeditor.serialize();
+    let ccontent = allContents1["INPUTTEXT"].value;
+    let acontent = allContents2["AUTHORNAME"].value;
+    let tcontent = allContents3["TITLETEXT"].value;
+    if (!ccontent) {
+        contenteditor.setContent("<p><br></p>")
+    } else if (!acontent) {
+        authoreditor.setContent("<p><br></p>")
+    } else if (!tcontent) {
+        titleeditor.setContent("<p><br></p>")
+    }
 });
 
 $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
         var ipaddress = data["ip"];
         $.post("/checkunpub", { ip: ipaddress }, function (output) {
             if (output != null) {
-                authoreditor.setContent(output["author"]);
-                titleeditor.setContent(output["title"]);
-                contenteditor.setContent(output["text"]);
+                document.getElementById("TITLETEXT").innerHTML = output["title"];
+                document.getElementById("AUTHORNAME").innerHTML = output["author"];
+                document.getElementById("INPUTTEXT").innerHTML = output["text"];
             };
         }
-        )});
+)});
 
 setInterval(function () {
     $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
         var ipaddress = data["ip"];
-        var title = titleeditor.getContent();
-        var author = authoreditor.getContent();
-        var text = contenteditor.getContent();
+        var title = document.getElementById("TITLETEXT").innerHTML;
+        var author = document.getElementById("AUTHORNAME").innerHTML;
+        var text = document.getElementById("INPUTTEXT").innerHTML;
+        // var delta = contenteditor.serialize();
+        // console.log(delta["INPUTTEXT"].value);
         $.post("/unpublished", {ip: ipaddress, author: author, title: title, text: text })
     });
-}, 2000);
+}, 5000);
 
 
 function func1() {
     $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
         var ipaddress = data["ip"];
-        var title = titleeditor.getContent();
-        var author = authoreditor.getContent();
-        var delta = contenteditor.getContent();
-        if (author.length > 10) {
-            if (title.length > 10) {
+        var title = document.getElementById("TITLETEXT").innerHTML;
+        var author = document.getElementById("AUTHORNAME").innerHTML;
+        var delta = document.getElementById("INPUTTEXT").innerHTML;
+        // var delta = contenteditor.serialize();
+        if (document.getElementById("AUTHORNAME").textContent.length > 2) {
+            if (document.getElementById("TITLETEXT").textContent.length > 2) {
                 if (delta != null) {
-                    if (delta != '<p></p>') {
+                    if (delta != '<p><br></p>') {
                                 $.post("/cpapi", { ip: ipaddress, token: link, cyrauthor: author, cyrheadline: title, content: delta });
                                 setTimeout(() => {
                                     window.location.href = "/" + link;
-                                }, 1000);
+                                }, 5000);
                     }
                 }
             } else {

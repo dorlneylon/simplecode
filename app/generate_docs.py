@@ -38,6 +38,7 @@ Routes = [
     Route("/createpost", "createOne", createOne, ["POST"], True, createOne.__doc__),
     Route("/checkpost", "checkpost", checkpost, ["POST"], True, checkpost.__doc__),
     Route("/icons", "icons", icons, ["GET", "POST"], True, icons.__doc__),
+    Route("/api", "api", api, ["GET"], True, api.__doc__ or "Nothing special"),
     Route("/cpapi", "cpapi", cpapi, ["POST"], True, cpapi.__doc__),
     Route("/index", "index", index, ["GET", "POST"], True, index.__doc__),
     Route("/unpublished", "unpublished", unpublished, ["POST"], True, unpublished.__doc__),

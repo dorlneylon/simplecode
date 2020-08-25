@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/vs2015.min.css">
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.runtime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.ui.widget@1.10.3/jquery.ui.widget.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.iframe-transport/1.0.1/jquery.iframe-transport.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.28.0/js/jquery.fileupload.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/vs2015.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.0/highlight.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/medium-editor.css') }}" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tim.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/medium-embed-front.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/medium-embed.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.3/css/medium-editor.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/medium-editor-tables.css') }}">
     <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
     <script src="{{ url_for('static', filename='js/mobile-medium.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/medium-embed.js') }}"></script>
     <script src="{{ url_for('static', filename='js/medium-button.js') }}"></script>
     <script src="{{ url_for('static', filename='js/medium-tables.js') }}"></script>
 <head>
@@ -19,18 +29,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@1,500&display=swap" rel="stylesheet", type="text/css">
-    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
     <meta charset="UTF-8">
     {% block head %}
     <h1><a href="/">SimpleCode</a></h1>
     {% endblock %}
 </head>
 <body>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&display=swap" rel="stylesheet">
     {% block body %}
 <div class="sides" contenteditable="false" dir="auto">
-    <div class="form" contenteditable="false" dir="auto" id="T"><h1 class="empty" id="TITLETEXT" spellcheck="false" contenteditable="false">{{ title }}<br></h1>
+    <h1 class="form" contenteditable="false" dir="auto" id="T"><h1 class="empty" id="TITLETEXT" spellcheck="false" contenteditable="false">{{ title }}<br></h1>
     </div>
     <div class="form" contenteditable="false" dir="auto">
     <section><address name="A" contenteditable="false" spellcheck="false" id="AUTHORNAME" class="empty">{{ author }}<br></address>
