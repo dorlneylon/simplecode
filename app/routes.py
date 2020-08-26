@@ -3,7 +3,6 @@ from .models import Page, Unpublished, db
 from .middleware import posts_limiter
 import uuid
 from sqlalchemy.exc import IntegrityError
-import markdown2
 import json
 from html2text import html2text
 from .app_config import POSTS_LIMIT
