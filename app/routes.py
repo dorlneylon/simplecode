@@ -1,5 +1,6 @@
 from flask import render_template, request, jsonify, redirect, Markup, send_file
 from .models import Page, Unpublished, db
+from . import app
 from .middleware import posts_limiter
 import uuid
 from sqlalchemy.exc import IntegrityError
