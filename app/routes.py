@@ -9,7 +9,7 @@ from .app_config import POSTS_LIMIT
 
 
 @posts_limiter
-@app_route('/<token>', methods=["POST","GET"])
+@app.route('/<token>', methods=["POST","GET"])
 def get_lel(token):
     """
     Description: Here you can see what you or somebody has published recently.
@@ -31,7 +31,7 @@ def get_lel(token):
 
 
 @posts_limiter
-@app_route('/', methods=["POST","GET"])
+@app.route('/', methods=["POST","GET"])
 def home():
     """
     Description: Home page where you're able to create a post or to check how to use API.
@@ -41,7 +41,7 @@ def home():
     elif request.method == "POST":
         return jsonify({ "message": "To create a post simply go on /createpost with POST method with 'author', 'title' and the 'content' fields. If you want to check any post then just go on /checkpost with the link to the post you want to get info about." })
 
-@app_route('/icons', methods=["POST","GET"])
+@app.route('/icons', methods=["POST","GET"])
 def icons():
     """
     Description: Shows icons for CSS.
@@ -50,7 +50,7 @@ def icons():
     return send_file("static/images/icons.png")
 
 @posts_limiter
-@app_route('/createpost', methods=["POST"])
+@app.route('/createpost', methods=["POST"])
 def createOne():
     """
     Requires: author, title, content.
@@ -78,7 +78,7 @@ def createOne():
     # return insert(author=an, title=ti, content=ct)
 
 @posts_limiter
-@app_route('/cpapi', methods=["POST"])
+@app.route('/cpapi', methods=["POST"])
 def cpapi():
     """
     Requires: author's name, title, token, content.
@@ -107,11 +107,11 @@ def cpapi():
         return "409"
     return "201"
 
-@app_route('/api', methods=["GET"])
+@app.route('/api', methods=["GET"])
 def api():
     return render_template("api.html")
 
-@app_route('/checkpost', methods=["POST"])
+@app.route('/checkpost', methods=["POST"])
 def checkpost():
     """
     Requires: link.
@@ -136,21 +136,21 @@ def checkpost():
     author = data.cyrauthor
     return jsonify({ "title" : title, "link": f"/{token}", "author" : author, "publish date" : date, "content" : output })
 
-@app_route('/-', methods=["POST","GET"])
+@app.route('/-', methods=["POST","GET"])
 def getback():
     """
     Description: This page was created just to make sure people are not trying to publish empty fields. In the newest version of this site JS creates tokens instead, though.
     """
     return redirect('/')
 
-@app_route('/index', methods=["POST","GET"])
+@app.route('/index', methods=["POST","GET"])
 def index():
     """
     Description: simple redirect if you want to use /index.
     """
     return redirect("/")
 
-@app_route('/unpublished', methods=["POST"])
+@app.route('/unpublished', methods=["POST"])
 def unpublished():
     """
     Requires: ip address, title, author, content, inserts.
@@ -174,7 +174,7 @@ def unpublished():
         db.session.commit()
     return "201"
 
-@app_route('/checkunpub', methods=["POST"])
+@app.route('/checkunpub', methods=["POST"])
 def checkunpub():
     """
     Requires: ip address.
