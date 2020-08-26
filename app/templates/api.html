@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.runtime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.ui.widget@1.10.3/jquery.ui.widget.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.iframe-transport/1.0.1/jquery.iframe-transport.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.28.0/js/jquery.fileupload.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vs2015.css') }}">
+    <script src="{{ url_for('static', filename='js/highlight.pack.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/medium-editor.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tim.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/medium-editor-tables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/medium-embed-front.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/medium-embed.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.3/css/medium-editor.min.css" />
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <script src="{{ url_for('static', filename='js/medium-embed.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mobile-medium.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/medium-button.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/medium-tables.js') }}"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/api.css') }}">
+    <title>SimpleCode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    {% block head %}
+    <h1><a href="/">SimpleCode</a></h1>
+    {% endblock %}
+</head>
+<body>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&display=swap" rel="stylesheet">
+    {% block body %}
+<div class="sides" contenteditable="false" dir="auto">
+    <h1 contenteditable="false" id="TITLETEXT" dir="auto"><strong>How to use our API system</strong>
+    </h1>
+    <address class="form" id="AUTHORNAME" contenteditable="false" dir="auto">Dorl Neylon
+    </address>
+    <div id="form">
+    <div class="form medium-editor-element" id="INPUTTEXT" dir="auto" spellcheck="false" data-medium-editor-element="true" role="textbox" aria-multiline="true" data-medium-editor-editor-index="1" medium-editor-index="78a96a9e-0f10-c40d-e833-c9b78d2898c1" data-placeholder="Content" data-medium-focused="true" contenteditable="false"><h2><b>SimpleCode's API system's JSON-based default-type API.</b></h2><div><p><br></p></div><h3><b>Step 1. Introduction.</b></h3><p>To create a post you should go to <i>/createpost</i> with <b>author, title</b> and <b>content </b>fields. <b>For example,</b></p><p><pre>$.post("/createpost", { "author" : "Dorl Neylon", "title" : "How to use our API system", "content" : "Some stuff here" })</pre></p><p>As an <b>output </b>you'll get something like this:</p><p><pre>{ "link" : "/token", "author" : "testauthor", "title" : "testtitle", "content" : "testcontent", "publish date" : "01.01.2000" }</pre></p><p><i>Token </i>is a 5-letters code situated in the link. You'll need a token if you want to check other post's info. To do that, go to <i>/checkpost</i> page with the link field. For example,</p><p><pre>$.post("/checkpost", { "link" : "qewcz" })</pre></p><p>As an <b>output </b>you'll get the same thing you could get from the <i>/createpost</i> page.</p><p><br></p><h3><b>Step 2. Formats?</b></h3><p>There're ways to post not only ridiculously simple posts. Below these there are codewords for formatting.</p><ul><li>    <i>[NEWLINE]</i> - this means a new line starts. Please, don't use too long lines.</li><li>    <i>[ENDLINE]</i> - this means the end of the line.</li><li>    <i>[EMPTYLINE]</i> - this will be replaced with a &lt;br&gt; tag.</li><li>    <i>[BOLD]</i> - this will start your bold text.</li><li>    <i>[/BOLD]</i> - this'll end your bold text.</li><li>    <i>[ITALIC]</i> - this'll start your italic text.</li><li>    <i>[/ITALIC]</i> - this'll end your italic text.</li><li>    <i>[QUOTE]</i> - this'll start your quote. Please, don't use too long quotes.</li><li>    <i>[/QUOTE]</i> - this'll end your quote.</li><li>    <i>[H2]</i> - this'll remake your text into a header.</li><li>    <i>[/H2]</i> - the end of the header.</li><li>    <i>[H3]</i> - the start of the sub-header.</li><li>    <i>[/H3]</i> - the end of the sub-header.</li><li>    <i>[CODE]</i> - the start of the code block.</li><li>    <i>[/CODE]</i> - the end of the code block.</li><li>    <i>[TABLE]</i> - the start of the table.</li><li>    <i>[/TABLE]</i> - the end of the table.</li><li>    <i>[TR]</i> - the start of the new row in a table. Replaces with &lt;tr&gt; tag.</li><li>    <i>[/TR]</i> - the end the row in a table.</li><li>    <i>[TD]</i> - the start of the new block in a row in a table. Replaces with &lt;td&gt; tag.</li><li>    <i>[/TD]</i> - the end of the block in a row in a table.</li></ul><p><b>For example,</b></p><p></p><pre><p>let content = "[NEWLINE]Plain text[ENDLINE][NEWLINE] \</p><p>               [BOLD]Bold and[/BOLD][ITALIC]italic[/ITALIC] text[ENDLINE] \</p><p>               [CODE][NEWLINE]welcome = lambda d: print(f'hello, {d}')[ENDLINE] \</p><p>               [NEWLINE]welcome('Dorl Neylon')[ENDLINE][/CODE] \</p><p>               [TABLE][TR][TD]abc[/TD][TD]def[/TD][/TR] \</p><p>               [TR][TD]asdf[/TD][TD]zxcv[/TD][/TR][/TABLE]".split('               ').join('');</p><p>$.post("/createpost", { "author" : "Dorl Neylon", "title" : "How to use our API system", "content" : content })</p></pre><p></p><p><br></p><h3><b>Step 3. We need your help!</b></h3><p>Please, if you find a way to fix some troubles with this site, feel free to <a href="https://github.com/dorlneylon/simplecode">contribute</a> and pull using github.</p>
+    </div>
+</div>
+    </div>
+</div>
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+</body>
+</html>
