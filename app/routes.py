@@ -1,13 +1,14 @@
 from flask import render_template, request, jsonify, redirect, Markup, send_file
 from .models import Page, Unpublished, db
+from . import app
 from .middleware import posts_limiter
+from werkzeug.utils import secure_filename
+import os
 import uuid
 from sqlalchemy.exc import IntegrityError
-import markdown2
 import json
 from html2text import html2text
 from .app_config import POSTS_LIMIT
-
 
 @posts_limiter
 def get_lel(token):
@@ -29,6 +30,14 @@ def get_lel(token):
         else:
             return render_template('404.html')
 
+def img_upload():
+    if request.method == 'POST':
+        files = request.files
+        if files is not None:
+            file = files['files[]']
+            filename = secure_filename(file.filename)
+            files.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return jsonify(files=[{"url" : app.config['UPLOAD_FOLDER'], "fileName" : file}, ])
 
 @posts_limiter
 def home():
@@ -64,14 +73,15 @@ def createOne():
         Token = str(uuid.uuid4())[:5]
     except KeyError:
         return jsonify({ "message" : "Something went wrong. You've probably missed a row. Try again." })
+    input = ct.replace("[NEWLINE]", "<p class=\"\">").replace("[ENDLINE]", "</p>").replace("[EMPTYLINE]", "<br>").replace("[BOLD]", "<b>").replace("[/BOLD]", "</b>").replace("[ITALIC]", "<i>").replace("[/ITALIC]", "</i>").replace("[QUOTE]", "<blockquote>").replace("[/QUOTE]", "</blockquote>").replace("[H2]", "<h2>").replace("[/H2]", "</h2>").replace("[H3]", "<h3>").replace("[/H3]", "</h3>").replace("[CODE]", "<pre>").replace("[/CODE]", "</pre>\n").replace("[TABLE]", "<table class=\"medium-editor-table\" width=\"100%\"><tbody>").replace("[/TABLE]", "</tbody></table>").replace("[TR]", "<tr>").replace("[/TR]", "</tr>\n").replace("[TD]", "<td>\n").replace("[/TD]", "</td>\n")
     try:
-        data = Page(cyrtitle=ti, cyrauthor=an, token=Token, text=ct)
+        data = Page(cyrtitle=ti, cyrauthor=an, token=Token, text=input)
         db.session.add(data)
         db.session.commit()
     except:
         return "409"
 
-    return jsonify({ "link" : f"/{data.token}", "author" : data.cyrauthor, "title" : data.cyrtitle, "content" : data.text, "publish date" : str(data.date)[:10] })
+    return jsonify({ "link" : f"/{data.token}", "author" : data.cyrauthor, "title" : data.cyrtitle, "content" : str(html2text(data.text)), "publish date" : str(data.date)[:10] })
     # return insert(author=an, title=ti, content=ct)
 
 @posts_limiter
@@ -102,6 +112,9 @@ def cpapi():
     except:
         return "409"
     return "201"
+
+def api():
+    return render_template("api.html")
 
 def checkpost():
     """
@@ -173,4 +186,7 @@ def checkunpub():
         data = Unpublished.query.filter_by(ip=ipaddress).all()[-1]
     except IndexError:
         data = Unpublished.query.filter_by(ip=ipaddress).first()
-    return jsonify({ "author" : data.author, "title" : data.title, "text" : data.content })
+    if data is not None:
+        return jsonify({ "author" : data.author if data.author else "<p><br></p>", "title" : data.title if data.title else "<p><br></p>", "text" : data.content })
+    else:
+        return None

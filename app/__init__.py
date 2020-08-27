@@ -6,6 +6,7 @@ from .app_config import *
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODS
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 from .routes import *
 from .generate_docs import *

@@ -16,16 +16,22 @@ var contenteditor = new MediumEditor(contentfield, {
     buttonLabels: 'fontawesome',
     autoLink: true,
     extensions: {
-        'pre' : new MediumButton({label:'<i class="fa fa-code", style="-webkit-text-stroke: 1px white; color: white"></i>', start:"<pre>", end:"</pre>",
+        'pre' : new MediumButton({label:'<i class="fa fa-code", style="-webkit-text-stroke: 1px white; color: white"></i>',
         action: function (html) {
-            if ($(window).width() < 993) {
-                $(".warnpre").css({"margin-top" : "-10%"});
-                setTimeout(() => {$(".warn-pre").css({"margin-top" : "-60%"})}, 2000);
-             } else {
-                $(".warn-pre").css({"margin-top" : "-3%"});
-                setTimeout(() => {$(".warn-pre").css({"margin-top" : "-20%"})}, 2000);
-             };
-             return html;
+            if (html.includes("<pre>") != true && document.querySelector("button > .fa-code").classList.contains("block") != true) {
+                if ($(window).width() < 993) {
+                    $(".warnpre").css({"margin-top" : "-10%"});
+                    setTimeout(() => {$(".warn-pre").css({"margin-top" : "-60%"})}, 2000);
+                 } else {
+                    $(".warn-pre").css({"margin-top" : "-3%"});
+                    setTimeout(() => {$(".warn-pre").css({"margin-top" : "-20%"})}, 2000);
+                 };
+                 return "<pre>" + html + "</pre>";
+            } else if (html.includes("<pre>")) {
+                return html.replace("<pre>", "").replace("</pre>", "");
+            } else if (document.querySelector("button > .fa-code").classList.contains("block")) {
+                return html;
+            }
         }
         }),
         table: new MediumEditorTable(),
@@ -80,7 +86,57 @@ var contenteditor = new MediumEditor(contentfield, {
 $(function () {
     $('#INPUTTEXT').mediumInsert({
         editor: contenteditor,
-    });
+        addons: { // (object) Addons configuration
+            images: { // (object) Image addon configuration
+                label: '<span class="fa fa-camera"></span>', // (string) A label for an image addon
+                uploadScript: null, // DEPRECATED: Use fileUploadOptions instead
+                deleteScript: 'delete.php', // (string) A relative path to a delete script
+                deleteMethod: 'POST',
+                fileDeleteOptions: {}, // (object) extra parameters send on the delete ajax request, see http://api.jquery.com/jquery.ajax/
+                preview: true, // (boolean) Show an image before it is uploaded (only in browsers that support this feature)
+                captions: true, // (boolean) Enable captions
+                captionPlaceholder: 'Type caption for image (optional)', // (string) Caption placeholder
+                autoGrid: 3, // (integer) Min number of images that automatically form a grid
+                formData: {}, // DEPRECATED: Use fileUploadOptions instead
+                fileUploadOptions: { // (object) File upload configuration. See https://github.com/blueimp/jQuery-File-Upload/wiki/Options
+                    url: '/upload',
+                    acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+                },
+                styles: {
+                    wide: {
+                        label: '<span class="fa fa-align-justify"></span>',
+                        added: function ($el) {},
+                        removed: function ($el) {}
+                    },
+                    left: {
+                        label: '<span class="fa fa-align-left"></span>'
+                    },
+                    right: {
+                        label: '<span class="fa fa-align-right"></span>'
+                    },
+                    grid: {
+                        label: '<span class="fa fa-th"></span>'
+                    }
+                },
+                actions: {
+                    remove: {
+                        label: '<span class="fa fa-times"></span>',
+                        clicked: function ($el) {
+                            var $event = $.Event('keydown');
+                            
+                            $event.which = 8;
+                            $(document).trigger($event);   
+                        }
+                    }
+                },
+                messages: {
+                    acceptFileTypesError: 'This file is not in a supported format: ',
+                    maxFileSizeError: 'This file is too big: '
+                },
+                uploadCompleted: function ($el, data) {},
+                uploadFailed: function (uploadErrors, data) {}
+            },
+    }});
 });
 
 var authoreditor = new MediumEditor(authorfield, {
@@ -88,6 +144,7 @@ var authoreditor = new MediumEditor(authorfield, {
     placeholder: {
         text: 'Author'
     },
+    autoLink: true,
     spellcheck: false
 });
 
@@ -158,17 +215,17 @@ $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
         }
 )});
 
-setInterval(function () {
-    $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
-        var ipaddress = data["ip"];
-        var title = document.getElementById("TITLETEXT").innerHTML;
-        var author = document.getElementById("AUTHORNAME").innerHTML;
-        var text = document.getElementById("INPUTTEXT").innerHTML;
-        // var delta = contenteditor.serialize();
-        // console.log(delta["INPUTTEXT"].value);
-        $.post("/unpublished", {ip: ipaddress, author: author, title: title, text: text })
-    });
-}, 5000);
+// setInterval(function () {
+//     $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
+//         var ipaddress = data["ip"];
+//         var title = document.getElementById("TITLETEXT").innerHTML;
+//         var author = document.getElementById("AUTHORNAME").innerHTML;
+//         var text = document.getElementById("INPUTTEXT").innerHTML;
+//         // var delta = contenteditor.serialize();
+//         // console.log(delta["INPUTTEXT"].value);
+//         $.post("/unpublished", {ip: ipaddress, author: author, title: title, text: text })
+//     });
+// }, 5000);
 
 
 function func1() {
@@ -178,14 +235,14 @@ function func1() {
         var author = document.getElementById("AUTHORNAME").innerHTML;
         var delta = document.getElementById("INPUTTEXT").innerHTML;
         // var delta = contenteditor.serialize();
-        if (author.length > 10) {
-            if (title.length > 10) {
+        if (document.getElementById("AUTHORNAME").textContent.length > 2) {
+            if (document.getElementById("TITLETEXT").textContent.length > 2) {
                 if (delta != null) {
                     if (delta != '<p><br></p>') {
                                 $.post("/cpapi", { ip: ipaddress, token: link, cyrauthor: author, cyrheadline: title, content: delta });
                                 setTimeout(() => {
                                     window.location.href = "/" + link;
-                                }, 1000);
+                                }, 5000);
                     }
                 }
             } else {

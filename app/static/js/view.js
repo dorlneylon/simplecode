@@ -9,10 +9,10 @@ document.getElementById("TITLETEXT").innerHTML = document.getElementById("TITLET
 document.querySelector("#INPUTTEXT").innerHTML = document.querySelector("#INPUTTEXT").textContent;
 // document.querySelector("#INPUTTEXT").innerHTML = JSON.parse(document.querySelector("#INPUTTEXT").textContent)["INPUTTEXT"].value;
 document.querySelectorAll("pre").forEach((element) => {
-    element.innerHTML = element.innerHTML.split("<p>").join("").split("</p>").join("\n<br>")
+    element.innerHTML = element.innerHTML.split("<p>").join("").split('<p class="">').join("").split("</p>").join("\n<br>")
 });
 
-$('.medium-insert-embeds-overlay').remove();
+$('.medium-insert-embeds-overlay').remove()
 
 // var contenteditor = new MediumEditor("#INPUTTEXT", {
 //     toolbar: false,

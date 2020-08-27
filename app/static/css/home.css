@@ -11,6 +11,10 @@ h1 a {
     background: none;
 }
 
+h2, h3 {
+    font-weight: 700;
+}
+
 a {
     border-bottom: 1px solid black;
 }
@@ -19,17 +23,18 @@ a {
     visibility: hidden;
 }
 
+.medium-editor-insert-plugin .medium-insert-buttons button {
+    border: 1px solid black;
+    color: black;
+}
+
 .medium-insert-buttons-show > span {
-    text-align: center;
-    padding-top: 3px;
+    position: inherit;
+    margin-bottom: -4px;
 }
 
 img {
     width: 80%;
-}
-
-.medium-editor-insert-buttons-show {
-    color: black;
 }
 
 a:visited {
@@ -139,7 +144,7 @@ a:hover {
 pre {
     color: white;
     background-color: rgb(27, 27, 27);
-    padding: 9.5px 9.5px 2px 9.5px;
+    /* padding: 9.5px 9.5px 2px 9.5px; */
 }
 
 
@@ -418,15 +423,13 @@ padding-bottom: 2em;
 }
 
 blockquote {
-    border-left: 3px solid black;
-    font-size: 22px;
-}
-
-.ql-syntax {
-    display: block;
-    box-sizing: border-box;
-    min-width: 1000px;
-    overflow: auto;
+/*! border-left: 3px solid black; */
+    border-left: 4px solid black;
+/*     padding-bottom: 30px; */
+    font-style: italic;
+    height: 60px;
+    position: relative;
+    padding-top: 1px;
 }
 
 .warn {
@@ -442,6 +445,7 @@ blockquote {
     margin-top: -20%;
     margin-left: 80%;
     border-radius: 30px;
+    transition: .5s;
     background-color: rgb(40, 40, 40);
 }
 
@@ -458,6 +462,7 @@ blockquote {
     margin-top: -25%;
     margin-left: 80%;
     text-align: center;
+    transition: .5s;
     border-radius: 30px;
     background-color: rgb(40, 40, 40);
 }
