@@ -38,8 +38,11 @@ Routes = [
     Route("/createpost", "createOne", createOne, ["POST"], True, createOne.__doc__),
     Route("/checkpost", "checkpost", checkpost, ["POST"], True, checkpost.__doc__),
     Route("/icons", "icons", icons, ["GET", "POST"], True, icons.__doc__),
-    Route("/api", "api", api, ["GET"], True, api.__doc__ or "Nothing special"),
+    Route("/api", "api", api, ["GET"], True, api.__doc__ if api.__doc__ else "\nNothing special"),
     Route("/cpapi", "cpapi", cpapi, ["POST"], True, cpapi.__doc__),
+    Route("/upload", "img_upload", img_upload, ["GET", "POST"], True, img_upload.__doc__ if img_upload.__doc__ else "\nNothing special"),
+    Route("/uploads/<string:filename>", "get_img", get_img, ["GET"], True, get_img.__doc__ if get_img.__doc__ else "\nNothing special"),
+    Route("/delete", "delete_file", delete_file, ["DELETE"], True, delete_file.__doc__ if delete_file.__doc__ else "\nNothing special"),
     Route("/index", "index", index, ["GET", "POST"], True, index.__doc__),
     Route("/unpublished", "unpublished", unpublished, ["POST"], True, unpublished.__doc__),
     Route("/checkunpub", "checkunpub", checkunpub, ["POST"], True, checkunpub.__doc__)

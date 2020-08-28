@@ -1,13 +1,14 @@
-from flask import render_template, request, jsonify, redirect, Markup, send_file
+from flask import render_template, request, jsonify, redirect, Markup, send_file, send_from_directory, url_for
 from .models import Page, Unpublished, db
+from . import app
 from .middleware import posts_limiter
+from werkzeug.utils import secure_filename
+import os
 import uuid
 from sqlalchemy.exc import IntegrityError
-import markdown2
 import json
 from html2text import html2text
 from .app_config import POSTS_LIMIT
-
 
 @posts_limiter
 def get_lel(token):
@@ -29,6 +30,46 @@ def get_lel(token):
         else:
             return render_template('404.html')
 
+def get_img(filename):
+    """
+    Description: a way to check the uploads. Mostly being used by jQuery File Upload.
+    Output: file.
+    """
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+def img_upload():
+    """
+    Description: file uploading by jQuery File Upload.
+    Output example: {"files" : [{"name" : "filename", "url" : "http://127.0.0.1:5000/uploads/filename"}]}.
+    """
+    if request.method == 'POST':
+        files = []        
+        file = request.files['files[]']
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            f = {
+                'name' : filename,
+                'url' : f"http://127.0.0.1:5000/uploads/{filename}"
+            }
+            files.append(f)
+            return jsonify({ "files" : files })
+
+def delete_file():
+    """
+    Description: file delete by jQuery File Upload.
+    Output example: { 'filename' : 'True' } or { 'filename' : 'False' }.
+    """
+    file = request.form['file'].split("http://127.0.0.1:5000/uploads/")[1]
+    path = os.path.join(app.config['UPLOAD_FOLDER'], file)
+    if os.path.exists(path):
+        try:
+            os.remove(path)
+            return jsonify({ 'filename' : 'True' })
+        except:
+            return jsonify({ 'filename' : 'False' })
+    else:
+        return jsonify({ 'filename' : 'False' })
 
 @posts_limiter
 def home():
@@ -105,6 +146,9 @@ def cpapi():
     return "201"
 
 def api():
+    """
+    Description: Here you can see how to use our API system even with text formats.
+    """
     return render_template("api.html")
 
 def checkpost():
@@ -177,4 +221,7 @@ def checkunpub():
         data = Unpublished.query.filter_by(ip=ipaddress).all()[-1]
     except IndexError:
         data = Unpublished.query.filter_by(ip=ipaddress).first()
-    return jsonify({ "author" : data.author if data.author else "<p><br></p>", "title" : data.title if data.title else "<p><br></p>", "text" : data.content })
+    if data is not None:
+        return jsonify({ "author" : data.author if data.author else "<p><br></p>", "title" : data.title if data.title else "<p><br></p>", "text" : data.content })
+    else:
+        return None

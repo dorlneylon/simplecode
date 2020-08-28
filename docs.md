@@ -10,6 +10,9 @@
 | /icons | icons | ['GET', 'POST'] | True |
 | /api | api | ['GET'] | True |
 | /cpapi | cpapi | ['POST'] | True |
+| /upload | img_upload | ['GET', 'POST'] | True |
+| /uploads/\<string:filename\> | get_img | ['GET'] | True |
+| /delete | delete_file | ['DELETE'] | True |
 | /index | index | ['GET', 'POST'] | True |
 | /unpublished | unpublished | ['POST'] | True |
 | /checkunpub | checkunpub | ['POST'] | True |
@@ -62,7 +65,11 @@ Description: Shows icons for CSS.
 Output: icons png.
 
 
-## api's docs:Nothing special
+## api's docs:
+
+Description: Here you can see how to use our API system even with text formats.
+
+
 ## cpapi's docs:
 
 Requires: author's name, title, token, content.
@@ -72,6 +79,27 @@ Description: cpapi - create post using api. There's no need to go on that page, 
 Possible errors: KeyError, IntegrityError.
 
 Output: 200.
+
+
+## img_upload's docs:
+
+Description: file uploading by jQuery File Upload.
+
+Output example: {"files" : [{"name" : "filename", "url" : "http://127.0.0.1:5000/uploads/filename"}]}.
+
+
+## get_img's docs:
+
+Description: a way to check the uploads. Mostly being used by jQuery File Upload.
+
+Output: file.
+
+
+## delete_file's docs:
+
+Description: file delete by jQuery File Upload.
+
+Output example: { 'filename' : 'True' } or { 'filename' : 'False' }.
 
 
 ## index's docs:
