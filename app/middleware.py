@@ -1,5 +1,6 @@
 from .models import Page, db
-from .app_config import POSTS_LIMIT
+import os
+from .app_config import POSTS_LIMIT, UPLOAD_FOLDER
 
 def posts_limiter(f):
     """

@@ -15,8 +15,18 @@ h1 a {
     background: none;
 }
 
+i {
+    font-family: 'Playfair Display', serif;
+}
+
 h2, h3 {
     font-weight: 700;
+}
+
+#TITLETEXT::after, #AUTHORNAME::after, #INPUTTEXT::after {
+    color: rgba(0,0,0,.44);
+    font-style: normal;
+    font-weight: 400;
 }
 
 a {
@@ -72,6 +82,7 @@ a:hover {
     background: transparent;
     font-size: xx-large;
     color: #000;
+    font-weight: 700;
 }
 
 #TITLETEXT::after {
@@ -427,15 +438,12 @@ padding-bottom: 2em;
 }
 
 blockquote {
-/*! border-left: 3px solid black; */
     border-left: 4px solid black;
-/*     padding-bottom: 30px; */
+    font-family: 'Playfair Display', serif;
     font-style: italic;
-    height: 60px;
     position: relative;
     padding-top: 1px;
 }
-
 .warn {
     font-family: 'Lora', serif;
     font-size: 16px;

@@ -1,6 +1,6 @@
 from flask import render_template, request, jsonify, redirect, Markup, send_file, send_from_directory, url_for
 from .models import Page, Unpublished, db
-from . import app
+from . import app, gen_filename
 from .middleware import posts_limiter
 from werkzeug.utils import secure_filename
 import os
@@ -18,7 +18,7 @@ def get_lel(token):
     Output example: page with data.
     """
     if request.method == 'POST':
-        return jsonify({ "message" : "To get data from post using POST method go to /checkpost page with post's link." })
+        return jsonify({ "message" : "To use API check /api page using GET method." })
     elif request.method == 'GET':
         data = Page.query.filter_by(token=token).first()
         if data is not None:
@@ -46,7 +46,7 @@ def img_upload():
         files = []        
         file = request.files['files[]']
         if file:
-            filename = secure_filename(file.filename)
+            filename = gen_filename(secure_filename(file.filename))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             f = {
                 'name' : filename,
@@ -79,7 +79,7 @@ def home():
     if request.method == "GET":
         return render_template('home.html')
     elif request.method == "POST":
-        return jsonify({ "message": "To create a post simply go on /createpost with POST method with 'author', 'title' and the 'content' fields. If you want to check any post then just go on /checkpost with the link to the post you want to get info about." })
+        return jsonify({ "message": "To use API check /api page using GET method." })
 
 
 def icons():
@@ -114,7 +114,6 @@ def createOne():
         return "409"
 
     return jsonify({ "link" : f"/{data.token}", "author" : data.cyrauthor, "title" : data.cyrtitle, "content" : str(html2text(data.text)), "publish date" : str(data.date)[:10] })
-    # return insert(author=an, title=ti, content=ct)
 
 @posts_limiter
 def cpapi():

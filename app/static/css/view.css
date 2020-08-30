@@ -8,6 +8,18 @@ h1 a {
     text-decoration: none;
 }
 
+i {
+    font-family: 'Playfair Display', serif;
+}
+
+h2, h3 {
+    font-weight: 700;
+}
+
+#TITLETEXT, #AUTHORNAME, #INPUTTEXT {
+    outline: none;
+}
+
 a {
     border-bottom: 1px solid black;
 }
@@ -66,6 +78,7 @@ a:hover {
     margin-left: 165px;
     margin-right: 0px;
     background: transparent;
+    font-weight: 700;
 }
 
 #Datetime {
@@ -133,8 +146,11 @@ pre {
 
 
 blockquote {
-    border-left: 3px solid black;
-    font-size: 22px;
+    border-left: 4px solid black;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    position: relative;
+    padding-top: 1px;
 }
 
 img {
